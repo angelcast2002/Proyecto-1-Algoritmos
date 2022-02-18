@@ -1,0 +1,21 @@
+(defun factorial (n)
+    (if (= n 0)
+        1
+        (* n (factorial (- n 1)))
+    )
+)
+
+(write-line "Factorial")
+(Write(factorial 3))
+(Write-line "")
+
+(defun fibonacci(n)
+    (if (<= n 1)
+        n
+        (+ (fibonacci(- n 1)) (fibonacci(- n 2)))
+    )
+)
+
+(write-line "Fibonacci")
+(write(fibonacci 5))
+(write-line "")
