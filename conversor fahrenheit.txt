@@ -1,0 +1,7 @@
+(defun fahrenheit(n)
+	(* (- n 32) (/ 5 9))
+)
+
+(write-line "Fahrenheit")
+(Write(fahrenheit 10))
+(Write-line "")
