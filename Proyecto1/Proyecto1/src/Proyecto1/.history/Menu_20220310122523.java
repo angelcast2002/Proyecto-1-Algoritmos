@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package Proyecto1;
-import java.util.Scanner;
 
 /**
  *
@@ -15,9 +14,9 @@ public class Menu {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-
+        
         // TODO code application logic here
-        Interprete miLispInterpreter = new Interprete();
+        Interpreter miLispInterpreter = new Interpreter();
 
 		Scanner in = new Scanner(System.in);
 		

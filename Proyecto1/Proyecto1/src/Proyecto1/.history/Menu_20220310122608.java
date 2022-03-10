@@ -3,7 +3,6 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Main.java to edit this template
  */
 package Proyecto1;
-import java.util.Scanner;
 
 /**
  *
