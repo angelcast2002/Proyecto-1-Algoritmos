@@ -30,8 +30,15 @@ public class Interprete {
         }
 
         case 2:{
-            return null;
-            // addOperation(expresion);
+            return OperacionResta(expresion);
+        }
+
+        case 3:{
+            return OperacionMultiplicacion(expresion);
+        }
+
+        case 4:{
+            return OperacionDivision(expresion);
         }
 
         default:{
@@ -72,4 +79,59 @@ public class Interprete {
        resultado.addResults(" suma ", "" + total);
        return resultado;
    }
+
+
+    private ResultadoOperacion OperacionResta(String expresion) {
+        Pattern pattern = Pattern.compile("([a-z]+|[0-9]+)", Pattern.CASE_INSENSITIVE); //
+        Matcher matcher = pattern.matcher(expresion);
+        Integer total = 0;
+        Integer num1 = 0;
+        Integer num2 = 0;
+        matcher.find();
+        num1 = Integer.parseInt(matcher.group().trim());
+        matcher.find();
+        num2 = Integer.parseInt(matcher.group().trim());
+
+        total = num1 - num2;
+        
+        OperacionAritmetica resultado = new OperacionAritmetica();
+        resultado.addResults(" resta ", "" + total);
+        return resultado;
+    }
+
+    private ResultadoOperacion OperacionMultiplicacion(String expresion) {
+        Pattern pattern = Pattern.compile("([a-z]+|[0-9]+)", Pattern.CASE_INSENSITIVE); //
+        Matcher matcher = pattern.matcher(expresion);
+        Integer total = 0;
+        Integer num1 = 0;
+        Integer num2 = 0;
+        matcher.find();
+        num1 = Integer.parseInt(matcher.group().trim());
+        matcher.find();
+        num2 = Integer.parseInt(matcher.group().trim());
+
+        total = num1 * num2;
+        
+        OperacionAritmetica resultado = new OperacionAritmetica();
+        resultado.addResults(" multiplicacion ", "" + total);
+        return resultado;
+    }
+
+    private ResultadoOperacion OperacionDivision(String expresion) {
+        Pattern pattern = Pattern.compile("([a-z]+|[0-9]+)", Pattern.CASE_INSENSITIVE); //
+        Matcher matcher = pattern.matcher(expresion);
+        Integer total = 0;
+        Integer num1 = 0;
+        Integer num2 = 0;
+        matcher.find();
+        num1 = Integer.parseInt(matcher.group().trim());
+        matcher.find();
+        num2 = Integer.parseInt(matcher.group().trim());
+
+        total = num1 / num2;
+        
+        OperacionAritmetica resultado = new OperacionAritmetica();
+        resultado.addResults(" division ", "" + total);
+        return resultado;
+    }
 }
