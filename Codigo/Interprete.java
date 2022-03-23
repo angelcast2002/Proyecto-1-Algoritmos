@@ -100,6 +100,38 @@ public class Interprete {
                 break;
 
             case "setq":
+
+                String name = comando[1];
+
+                boolean existeVariable = false;
+                Variable oldVariable = null;
+                for (Variable variable : variables) {
+                    if (variable.getNombre().equals(name)){
+
+                        existeVariable = true;
+                        oldVariable = variable;
+
+                    } 
+                }
+
+                try {
+                    if (comando[2].split("")[0].equals("")) {
+
+                        if (existeVariable) {
+                            oldVariable.setValor(comando[2].trim().substring(1));
+                        } else {
+                            variables.add(new Variable(name, comando[2].trim().substring(1)));
+                        }
+
+                    }
+
+
+
+
+                } catch (Exception e) {
+                    
+                }
+                
                 break;
 
             case "first":
