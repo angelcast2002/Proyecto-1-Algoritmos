@@ -812,13 +812,13 @@ public class Interprete {
                 for (int j = 0; j < comando.length; j++) {
                     if (j != 0) {
 
-                        if (comando[j].split("")[0].equals("'")) { // Texto
+                        if (comando[j].split("")[0].equals("'")) { 
                             listaCompleta += comando[j].substring(1) + " ";
 
-                        } else if (isNumber(comando[j])) { // Es un numero
+                        } else if (isNumber(comando[j])) { 
                             listaCompleta += comando[j] + " ";
 
-                        } else { // Variable
+                        } else { 
                             Boolean existe = false;
                             for (Variable variable : variables) {
                                 if (variable.getNombre().equals(comando[1])) {
