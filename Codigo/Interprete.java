@@ -115,7 +115,8 @@ public class Interprete {
                 }
 
                 try {
-                    if (comando[2].split("")[0].equals("")) {
+                    if (comando[2].split("")[0].equals("")) 
+                    {
 
                         if (existeVariable) {
                             oldVariable.setValor(comando[2].trim().substring(1));
@@ -123,13 +124,90 @@ public class Interprete {
                             variables.add(new Variable(name, comando[2].trim().substring(1)));
                         }
 
+                    } else if (isNumber(comando[2])) 
+                    {
+                        if (existeVariable) {
+
+                            oldVariable.setValor(comando[2].trim());
+
+                        } else {
+                            variables.add(new Variable(name, comando[2].trim()));
+                        }
+
+                    } else 
+                    {
+
+                        Boolean exists = false;
+
+                        for (Variable variable : variables) {
+                            if (variable.getNombre().equals(comando[2])) {
+                                exists = true;
+                                if (existeVariable) {
+                                    oldVariable.setValor(variable.getValor());
+                                } else {
+                                    variables.add(new Variable(name, variable.getValor()));
+                                }
+                            }
+                        }
+
+                        if (!exists) {
+                            vista.prinrErr("ERROR " + comando[2] + " no es una variable definida");
+                        }
+
                     }
-
-
-
 
                 } catch (Exception e) {
                     
+                    orden = lista[i + 1];
+                    orden = orden.replace("-", "(");
+                    comando = orden.split(" ");
+
+                    if (comando[0].split("")[0].equals("'")) {
+                        if (existeVariable) {
+                            oldVariable.setValor(orden.trim().substring(1));
+                        } else {
+                            variables.add(new Variable(name, orden.trim().substring(1)));
+                        }
+                    }
+
+                    if (comando[0].split("")[0].equals("(")) {
+
+                        orden = orden.substring(0, orden.length() - 1);
+                        orden = orden.substring(1);
+                        String[] elements = orden.split(" ");
+
+                        String mensaje = "";
+
+                        for (int j = 0; j < elements.length; j++) {
+                            
+                            if (elements[j].split("")[0].equals("")) {
+                                mensaje += elements[j].substring(1) + " ";
+                            } else if (isNumber(elements[j])) {
+                                mensaje += elements[j] + " ";
+                            } else {
+                                Boolean exists = false; 
+                                for (Variable variable : variables) {
+                                    if (variable.getNombre().equals(elements[j])){
+                                        exists = true;
+                                        mensaje += variable.getValor() + " ";
+                                    }
+                                }
+
+                                if (!exists) {
+                                    vista.prinrErr("ERROR " + comando[1] + " no es una variable definida");
+                                }
+
+                            }
+                        }
+
+                        if (existeVariable) {
+                            oldVariable.setValor(mensaje);
+                        } else {
+                            variables.add(new Variable(name, mensaje));
+                        }
+
+                    }
+
                 }
                 
                 break;
