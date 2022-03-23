@@ -103,6 +103,66 @@ public class Interprete {
                 break;
 
             case "first":
+
+                try {
+
+                    String tempNombre = comando[1];
+                    for (Variable variable : variables) {
+                        if (variable.getNombre().equals(tempNombre)) {
+                            if (variable.getValor().split(" ").length > 0) {
+                                vista.print(variable.getValor().split(" ")[0]);
+                                break;
+                            } else {
+                                vista.prinrErr("[!] La variable " + tempNombre + " no es una lista");
+                                break;
+                            }
+                        }
+                    }
+
+                } catch (Exception e) { 
+                    orden = lista[i + 1];
+                    orden = orden.replace("-", "'(");
+                    comando = orden.split(" ");
+
+                    if (comando[0].split("")[0].equals("'")) {
+                        orden = orden.trim().substring(2);
+                        orden = orden.substring(0, orden.length() - 1);
+                        vista.print(orden.split(" ")[0]);
+
+                    } else if (comando[0].split("")[0].equals("(")) { 
+
+                        
+                        orden = orden.substring(0, orden.length() - 1);
+                        orden = orden.substring(1);
+                        String elemento = orden.split(" ")[0];
+
+                        
+                        if (elemento.split("")[0].equals("'")) { 
+                            vista.print(elemento.substring(1));
+
+                        } else if (isNumber(elemento)) { 
+                            vista.print(elemento);
+                            break;
+
+                        } else { // Variable
+                            Boolean existe = false;
+                            for (Variable variable : variables) {
+                                if (variable.getNombre().equals(elemento)) {
+                                    existe = true;
+                                    vista.print(variable.getValor());
+                                    break;
+                                }
+                            }
+
+                            if (!existe) {
+                                vista.prinrErr("[!] " + elemento + " no esta definido como variable o funcion");
+                            }
+
+                        }
+
+                    }
+                }
+
                 break;
 
             case "rest":
