@@ -154,5 +154,31 @@ public class Interprete {
         }
         return null;
     }
+
+    public static boolean isNumber(String valor){
+
+        if (valor == null || valor.equals("")) {
+            return false;
+        } 
+    
+        try {
+            Integer.parseInt(valor);
+            return true;
+        } catch (NumberFormatException e) {
+        }
+        return false;
+    }
+
+    public static int contarCaracteres(String chain, char caracter) {
+        int pos, contador = 0;
+        
+        pos = chain.indexOf(caracter);
+        while (pos != -1) {
+            contador++;
+            pos = chain.indexOf(caracter, pos + 1);
+        }
+        return contador;
+    }
+
 }
 
