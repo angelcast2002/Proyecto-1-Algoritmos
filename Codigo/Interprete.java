@@ -154,5 +154,20 @@ public class Interprete {
         }
         return null;
     }
+
+    public static boolean isNumber(String valor){
+
+        if (valor == null || valor.equals("")) {
+            return false;
+        } 
+    
+        try {
+            Integer.parseInt(valor);
+            return true;
+        } catch (NumberFormatException e) {
+        }
+        return false;
+    }
+
 }
 
