@@ -10,9 +10,44 @@ public class Interprete {
     String instruccion = "";
     
     List<Variable> variables = new ArrayList<>();
-    
 
-    public String ejecutar(String instruccion) {
+    public void ejecutar() {
+
+        Boolean estado = true;
+        while (estado) {
+
+            if (instruccion.length() > 0) {
+                System.out.print("$$ ... ");
+            } else {
+                System.out.print("$$ ");
+            }
+            String tempInstruccion = sc.nextLine().toLowerCase();
+            instruccion += " " + tempInstruccion;
+
+            if (instruccion.equals(" (exit)")) {
+                estado = false;
+            } else {
+                int parentesisApertura = contarCaracteres(instruccion, '(');
+                int parentesisCierre = contarCaracteres(instruccion, ')');
+
+                // Ver si se ha completado la intruccion
+                if (parentesisApertura == parentesisCierre) {
+
+                    if (parentesisCierre > 0) {
+                        String result = Evaluar(instruccion);
+                    } else {
+                        vista.prinrErr("[Error] Las intrucciones inician con -- ( -- y finalizan con -- ) --");
+                    }
+
+                    instruccion = "";
+                }
+            }
+
+        }
+
+    }
+
+    public String Evaluar(String instruccion) {
         
         instruccion = instruccion.trim();
         instruccion = instruccion.substring(0, instruccion.length() - 1);
