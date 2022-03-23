@@ -12,7 +12,7 @@ public class Interprete {
     List<Variable> variables = new ArrayList<>();
     
 
-    public String evaluar(String instruccion) {
+    public String ejecutar(String instruccion) {
         
         instruccion = instruccion.trim();
         instruccion = instruccion.substring(0, instruccion.length() - 1);
@@ -323,7 +323,7 @@ public class Interprete {
                             vista.print(elemento);
                             break;
 
-                        } else { // Variable
+                        } else { 
                             Boolean existe = false;
                             for (Variable variable : variables) {
                                 if (variable.getNombre().equals(elemento)) {
@@ -406,7 +406,7 @@ public class Interprete {
                                 } else if (isNumber(elementos[j])) { 
                                     tempList += elementos[j] + " ";
 
-                                } else { // Variable
+                                } else { 
                                     Boolean existe = false;
                                     for (Variable variable : variables) {
                                         if (variable.getNombre().equals(elementos[j])) {
