@@ -960,6 +960,34 @@ public class Interprete {
                 break;
 
             case "numberp":
+
+            String val = comando[1];
+            Variable vall = null;
+            String abc = "";
+
+
+            for(Variable varrr : variables){
+                if(varrr.getNombre().equals(val)){
+                    vall = varrr;
+                    val = vall.getValor();
+                }
+            }
+
+            if(vall == null){
+                if(isNumber(val)){
+                    vista.print("T");
+                }else{
+                    vista.print("nil");
+                }
+            }else{
+                abc = vall.getValor().trim();
+
+                if(isNumber(abc)){
+                    vista.print("T");
+                }else{
+                    vista.print("nil");
+                }
+            }
                 break;
 
             }
