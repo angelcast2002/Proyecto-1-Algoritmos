@@ -169,5 +169,16 @@ public class Interprete {
         return false;
     }
 
+    public static int contarCaracteres(String chain, char caracter) {
+        int pos, contador = 0;
+        
+        pos = chain.indexOf(caracter);
+        while (pos != -1) {
+            contador++;
+            pos = chain.indexOf(caracter, pos + 1);
+        }
+        return contador;
+    }
+
 }
 
