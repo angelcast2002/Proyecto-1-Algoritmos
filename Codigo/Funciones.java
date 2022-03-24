@@ -10,6 +10,11 @@ public class Funciones {
 		@param argus - Param que recibe para que pueda operar correctamente
 		@param eje - Operaciones de la funcion
      */
+
+     //Constructor sin nada
+     public Funciones() {
+     }
+
     public Funciones(String name, ArrayList<String> params,String argus) { //Sobrecargo mi constructor 
         this.params = params; //Asigno 
         this.argus = argus; //Asigno
