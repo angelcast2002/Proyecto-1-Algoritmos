@@ -1019,6 +1019,66 @@ public class Interprete {
                 break;
 
             case "cond":
+                try {
+                    
+                    nom = comando[2];
+                    nom2 = comando[3];
+                    _var1 = null;
+                    _var2 = null;
+
+                    for(Variable variable : variables){
+                        if(variable.getNombre().equals(nom)){
+                            _var1 = variable;
+                        }
+                    }
+
+                    for(Variable variablee : variables){
+                        if(variablee.getNombre().equals(nom2)){
+                            _var2 = variablee;
+                        }
+                    }
+
+                    Integer Variable1 = Integer.parseInt(_var1.getValor());
+                    Integer Variable2 = Integer.parseInt(_var2.getValor());
+                    switch (comando[1]) {
+                        case "==":
+                            if (Variable1 == Variable2) {
+                                vista.print("T");
+                            } else {
+                                vista.print("nill");
+                            }
+                            break;
+                        case "!=":
+                            if (Variable1 != Variable2) {
+                                vista.print("T");
+                            } else {
+                                vista.print("nill");
+                            }
+                            break;
+                        case "<":
+                            if (Variable1 < Variable2) {
+                                vista.print("T");
+                            } else {
+                                vista.print("nill");
+                            }
+                            break;
+                        case ">":
+                            if (Variable1 > Variable2) {
+                                vista.print("T");
+                            } else {
+                                vista.print("nill");
+                            }
+                            break;
+                        default:
+                            vista.prinrErr("No se reconocio el condicional, intente con (==,!=,>,<)");
+                            break;
+                    }
+                    
+                } catch (Exception e) {
+                    //TODO: handle exception
+                    vista.prinrErr("[!] Una o las dos variables no estan definidas");
+                }
+                
                 break;
 
             case "null":
