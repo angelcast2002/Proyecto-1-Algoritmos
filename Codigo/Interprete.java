@@ -1056,7 +1056,6 @@ public class Interprete {
                                         if (comp1.equals(comp2)) {
                                             for (int k = 0; k < newSepArg.size(); k++) {
                                                 if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
-                                                    System.out.println("LLEGO A EXPRESION DENTRO DEL IF");
                                                     String expresion = newSepArg.get(k);
                                                     int result = calc.expresionesAritmeticasParam1(expresion, newSepArg, parametro);
                                                     System.out.println(result);
