@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Arrays;
+import java.util.ListIterator;
 
 public class Interprete {
 
@@ -940,6 +941,277 @@ public class Interprete {
                 break;
 
             case "defun":
+            //Constructor de Funciones para llamar metodos
+            Funciones calc = new Funciones();
+
+            //Guardar los parametros
+            String parametros = lista[1];
+            parametros = parametros.replace("(", "");
+            parametros = parametros.replace(")", "");
+            parametros = parametros.replace(" ", ",");
+
+            String[] sepParam = parametros.split(",");
+            ArrayList<String> newSepParam = new ArrayList<>();
+            for (int j = 0; j < sepParam.length; j++) {
+                newSepParam.add(sepParam[j]); 
+            }
+            newSepParam.removeAll(Arrays.asList(null," "));
+
+
+            //Guardar nombre funcion
+            String nombreFuncion = comando[1];
+
+            //Se inicializa argumento
+            String argumento = "";
+
+            //Guardar lo que hace la funcion (si hay 3 elementos en lista, se esta creando la funcion)
+            if (lista.length == 3) {
+                argumento = lista[2];
+                argumento = argumento.replace("(", "");
+                argumento = argumento.replace(")", "");
+                argumento = argumento.replace(" ", ",");
+            }
+
+            //Evalua si ya existe la funcion 
+            boolean existeFuncion = false;
+            Funciones oldFuncion = null;
+            for (Funciones funcionList : funciones) {
+
+                if (funcionList.getName().equals(nombreFuncion)) {
+                    existeFuncion = true;
+                    oldFuncion = funcionList;
+                }
+
+            }
+
+            //EXISTE LA FUNCION, EVALUA LA FUNCION CON PARAMETROS DADOS
+            if (existeFuncion) {
+                //Error en caso de que exista algun error
+                boolean error = false;
+
+                if (lista.length > 2) {
+                    //Si lista es mayor a 2, significa que el usuario ha intentado crear una funcion con el mismo nombre
+                    System.out.println("ERROR: " + "La funcion " + oldFuncion.getName() + " ya fue creada.");
+                } else {
+                    //No ha agregado un argumento a la funcion ya creado
+                    String arg1 = oldFuncion.getArgus();
+                    String[] sepArg = arg1.split(",");
+                    ArrayList<String> newSepArg = new ArrayList<>();
+                    for (int j = 0; j < sepArg.length; j++) {
+                        newSepArg.add(sepArg[j]); 
+                    }
+                    newSepArg.removeAll(Arrays.asList(null," "));
+    
+                    //Funcion de 1 parametro
+                    if (newSepParam.size() == 1) {
+                        String parametro = newSepParam.get(0);
+    
+                        //parametro temporal para evaluar funcion (defun suma (a) (+ a 10)) parametro temporal es a
+                        String tempParam = oldFuncion.getParams().get(0);
+                        //si el argumento contiene el parametro temporal
+                        if (newSepArg.contains(tempParam)) {
+                            //encuentra el parametro en el argumento
+                            ListIterator<String> iterator = newSepArg.listIterator();
+                            while (iterator.hasNext()) {
+                                String next = iterator.next();
+                                if (next.equals(tempParam)) {
+                                    //cambia el parametro temporal dentro del argumento por el parametro ingresado para evaluar la funcion
+                                    iterator.set(parametro);
+                                }
+                            }
+    
+                        } else {
+                            System.out.println("ERROR: El parametro no se encuentra en el argumento de la funcion");
+                            error = true;
+                        }
+
+                        //PARA RECURSIVIDAD WIP
+                        String nombreTemp = nombreFuncion;
+
+                        if (newSepArg.contains(nombreFuncion)) {
+                            //encuentra el parametro en el argumento
+                            ListIterator<String> iterator = newSepArg.listIterator();
+                            while (iterator.hasNext()) {
+                                String next = iterator.next();
+                                if (next.equals(nombreTemp)) {
+                                    iterator.set("");
+                                }
+                            }
+                        }
+
+
+                        if (!error) {
+                            for (int j = 0; j < newSepArg.size(); j++) {
+                                //hay un if
+                                if (newSepArg.get(j).equals("if")) {
+                                    //Toma el operador luego del if
+                                    String operator = newSepArg.get(j + 1);
+                                    //Toma los comparadores
+                                    String comp1 = newSepArg.get(j + 2);
+                                    String comp2 = newSepArg.get(j + 3);
+
+                                    switch (operator) {
+                                    //igual que
+                                    case "=":
+                                        if (comp1.equals(comp2)) {
+                                            for (int k = 0; k < newSepArg.size(); k++) {
+                                                if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
+                                                    System.out.println("LLEGO A EXPRESION DENTRO DEL IF");
+                                                    String expresion = newSepArg.get(k);
+                                                    int result = calc.expresionesAritmeticasParam1(expresion, newSepArg, parametro);
+                                                    System.out.println(result);
+                                                }
+                                            }
+                                        }
+                                        break;
+
+                                    //Mayor que
+                                    case ">":
+                                        try {
+                                            //Convierte los comparadores a int
+                                            int compInt1 = Integer.parseInt(comp1);
+                                            int compInt2 = Integer.parseInt(comp2);
+
+                                            if (compInt1 > compInt2) {
+
+                                            }
+
+                                        } catch (NumberFormatException e) {
+                                            System.out.println("ERROR: No se puede detectar mayor o menor que entre strings");
+                                        }
+                                        break;
+
+                                    } //fin del switch operator
+
+
+                                } else if (newSepArg.get(j).equals("+") || newSepArg.get(j).equals("r") || newSepArg.get(j).equals("*") || newSepArg.get(j).equals("/")) {
+                                    //Expresion aritmetica
+                                    String expresion = newSepArg.get(j);
+                                    
+                                    int result = calc.expresionesAritmeticasParam1(expresion, newSepArg, parametro);
+                                    System.out.println(result);
+
+                                } //fin de argumento siendo expresion aritmetica
+                            }
+                        }     
+                    } else if (newSepParam.size() == 2) { //Funcion de dos parametros
+
+                        String parametro1 = newSepParam.get(0);
+                        String parametro2 = newSepParam.get(1);
+
+                        //parametro temporal para evaluar funcion (defun suma (a) (+ a 10)) parametro temporal es a
+                        String tempParam1 = oldFuncion.getParams().get(0);
+                        String tempParam2 = oldFuncion.getParams().get(1);
+                        //si el argumento contiene el parametro temporal
+                        if (newSepArg.contains(tempParam1) && newSepArg.contains(tempParam2)) {
+                            //encuentra el parametro en el argumento
+                            ListIterator<String> iterator = newSepArg.listIterator();
+                            while (iterator.hasNext()) {
+                                String next = iterator.next();
+                                if (next.equals(tempParam1)) {
+                                    //cambia el parametro temporal 1 dentro del argumento por el parametro ingresado para evaluar la funcion
+                                    iterator.set(parametro1);
+                                }
+                                if (next.equals(tempParam2)) {
+                                    iterator.set(parametro2);
+                                }
+                            }
+    
+                        } else {
+                            System.out.println("ERROR: Los parametros no se encuentran en el argumento de la funcion");
+                            error = true;
+                        }
+
+                        //PARA RECURSIVIDAD WIP
+                        String nombreTemp = nombreFuncion;
+
+                        if (newSepArg.contains(nombreFuncion)) {
+                            //encuentra el parametro en el argumento
+                            ListIterator<String> iterator = newSepArg.listIterator();
+                            while (iterator.hasNext()) {
+                                String next = iterator.next();
+                                if (next.equals(nombreTemp)) {
+                                    iterator.set("");
+                                }
+                            }
+                        }
+
+                        if (!error) {
+                            for (int j = 0; j < newSepArg.size(); j++) {
+                                if (newSepArg.get(j).equals("if")) {
+        
+                                } else if (newSepArg.get(j).equals("+") || newSepArg.get(j).equals("r") || newSepArg.get(j).equals("*") || newSepArg.get(j).equals("/")) {
+                                    //Expresion aritmetica
+                                    String expresion = newSepArg.get(j);
+        
+                                    try {
+    
+                                        int sum = 0;
+                                        int result = 0;
+                                        int add = 0;
+                                        switch (expresion) {
+                                            case "+":
+                                            for (int k = 1; k < newSepArg.size(); k++) {
+                                                add += 1;
+                                                sum += Integer.parseInt(newSepArg.get(add));
+                                            }
+                                            result = sum;
+                                            break;
+        
+                                            case "r":
+                                            add = 1;
+                                            sum = Integer.parseInt(newSepArg.get(1));
+                                            for (int k = 0; k < newSepArg.size() - 2; k++) {
+                                                add += 1;
+                                                sum = sum - Integer.parseInt(newSepArg.get(add));
+                                            }
+                                            result = sum;
+                                            break;
+        
+                                            case "*":
+                                            add = 1;
+                                            sum = Integer.parseInt(newSepArg.get(1));
+                                            System.out.println(newSepArg);
+                                            for (int k = 0; k < newSepArg.size() - 2; k++) {
+                                                add += 1;
+                                                sum = sum * Integer.parseInt(newSepArg.get(add));
+                                            }
+                                            result = sum;
+                                            break;
+        
+                                            case "/":
+                                            add = 1;
+                                            sum = Integer.parseInt(newSepArg.get(1));
+                                            for (int k = 0; k < newSepArg.size() - 2; k++) {
+                                                add += 1;
+                                                sum = sum / Integer.parseInt(newSepArg.get(add));
+                                            }
+                                            result = sum;
+                                            break;
+                                        }
+                                        System.out.println(result);
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("ERROR " + "el interprete no puede operar strings");
+                                    }
+                                } //fin de argumento siendo expresion aritmetica
+                            }
+                        }
+                    } 
+                }
+
+            } else {
+                //NO EXISTE LA FUNCION
+                funciones.add(new Funciones(nombreFuncion, newSepParam, argumento));
+            }
+
+            //NO EXISTE NINGUNA FUNCION
+            if (funciones.isEmpty()) {
+                
+                funciones.add(new Funciones(nombreFuncion, newSepParam, argumento)); 
+                System.out.println("se agrego la primera funcion");
+                
+            }
+
                 break;
 
             case "ecuals":
