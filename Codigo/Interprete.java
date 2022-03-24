@@ -985,69 +985,77 @@ public class Interprete {
             //EXISTE LA FUNCION, EVALUA LA FUNCION CON PARAMETROS DADOS
             if (existeFuncion) {
 
-                String arg1 = oldFuncion.getArgus();
-                String[] sepArg = arg1.split(",");
-                ArrayList<String> newSepArg = new ArrayList<>();
-                for (int j = 0; j < sepArg.length; j++) {
-                    newSepArg.add(sepArg[j]); 
-                }
-                newSepArg.removeAll(Arrays.asList(null," "));
-
-                //Un parametro
-                if (newSepParam.size() == 1) {
-                    String parametro = newSepParam.get(0);
-
-                    //parametro temporal para evaluar funcion (defun suma (a) (+ a 10)) parametro temporal es a
-                    String tempParam = oldFuncion.getParams().get(0);
-                    //si el argumento contiene el parametro temporal
-                    if (newSepArg.contains(tempParam)) {
-
-                        //encuentra el parametro en el argumento
-                        ListIterator<String> iterator = newSepArg.listIterator();
-                        while (iterator.hasNext()) {
-                            String next = iterator.next();
-                            if (next.equals(tempParam)) {
-                                iterator.set(parametro);
-                            }
-                        }
-
-                    }
-
+                if (lista.length > 2) {
+                    //Si lista es mayor a 2, significa que el usuario ha intentado crear una funcion con el mismo nombre
+                    System.out.println("ERROR: " + "La funcion " + oldFuncion.getName() + " ya fue creada.");
+                } else {
+                    //No ha agregado un argumento a la funcion ya creado
+                    String arg1 = oldFuncion.getArgus();
+                    String[] sepArg = arg1.split(",");
+                    ArrayList<String> newSepArg = new ArrayList<>();
                     for (int j = 0; j < sepArg.length; j++) {
-                        if (newSepArg.get(j).equals("if")) {
-
-                        } else if (newSepArg.get(j).equals("+") || newSepArg.get(j).equals("-") || newSepArg.get(j).equals("*") || newSepArg.get(j).equals("/")) {
-                            //Expresion aritmetica
-                            String expresion = newSepArg.get(j);
-
-                            try {
-                                int num1 = Integer.parseInt(newSepArg.get(j + 1));
-                                int num2 = Integer.parseInt(newSepArg.get(j + 2));
-                                int result = 0;
-                                switch (expresion) {
-                                    case "+":
-                                    result = num1 + num2;
-                                    break;
-
-                                    case "-":
-                                    result = num1 - num2;
-                                    break;
-
-                                    case "*":
-                                    result = num1 * num2;
-                                    break;
-
-                                    case "/":
-                                    result = num1 / num2;
-                                    break;
+                        newSepArg.add(sepArg[j]); 
+                    }
+                    newSepArg.removeAll(Arrays.asList(null," "));
+    
+                    //Un parametro
+                    if (newSepParam.size() == 1) {
+                        String parametro = newSepParam.get(0);
+    
+                        //parametro temporal para evaluar funcion (defun suma (a) (+ a 10)) parametro temporal es a
+                        String tempParam = oldFuncion.getParams().get(0);
+                        //si el argumento contiene el parametro temporal
+                        if (newSepArg.contains(tempParam)) {
+    
+                            //encuentra el parametro en el argumento
+                            ListIterator<String> iterator = newSepArg.listIterator();
+                            while (iterator.hasNext()) {
+                                String next = iterator.next();
+                                if (next.equals(tempParam)) {
+                                    iterator.set(parametro);
                                 }
-                                System.out.println(result);
-                            } catch (NumberFormatException e) {
-                                System.out.println("ERROR " + "el interprete no puede operar strings");
+                            }
+    
+                        }
+    
+                        for (int j = 0; j < sepArg.length; j++) {
+                            if (newSepArg.get(j).equals("if")) {
+    
+                            } else if (newSepArg.get(j).equals("+") || newSepArg.get(j).equals("-") || newSepArg.get(j).equals("*") || newSepArg.get(j).equals("/")) {
+                                //Expresion aritmetica
+                                String expresion = newSepArg.get(j);
+    
+                                try {
+                                    int num1 = Integer.parseInt(newSepArg.get(j + 1));
+                                    int num2 = Integer.parseInt(newSepArg.get(j + 2));
+                                    int result = 0;
+                                    switch (expresion) {
+                                        case "+":
+                                        result = num1 + num2;
+                                        break;
+    
+                                        case "-":
+                                        result = num1 - num2;
+                                        break;
+    
+                                        case "*":
+                                        result = num1 * num2;
+                                        break;
+    
+                                        case "/":
+                                        result = num1 / num2;
+                                        break;
+                                    }
+                                    System.out.println(result);
+                                } catch (NumberFormatException e) {
+                                    System.out.println("ERROR " + "el interprete no puede operar strings");
+                                }
                             }
                         }
                     }
+
                 }
+
             } else {
                 //NO EXISTE LA FUNCION
                 funciones.add(new Funciones(nombreFuncion, newSepParam, argumento));
