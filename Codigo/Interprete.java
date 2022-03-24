@@ -1090,7 +1090,7 @@ public class Interprete {
                                             for (int k = 0; k < newSepArg.size(); k++) {
                                                 if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
                                                     String expresion = newSepArg.get(k);
-                                                    int result = calc.expresionesAritmeticasParam1(expresion, newSepArg, parametro);
+                                                    int result = calc.ifAritmeticaParam1(expresion, newSepArg, parametro);
                                                     System.out.println(result);
                                                 }
                                             }
@@ -1105,7 +1105,34 @@ public class Interprete {
                                             int compInt2 = Integer.parseInt(comp2);
 
                                             if (compInt1 > compInt2) {
+                                                for (int k = 0; k < newSepArg.size(); k++) {
+                                                    if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
+                                                        String expresion = newSepArg.get(k);
+                                                        int result = calc.ifAritmeticaParam1(expresion, newSepArg, parametro);
+                                                        System.out.println(result);
+                                                    }
+                                                }
+                                            }
 
+                                        } catch (NumberFormatException e) {
+                                            System.out.println("ERROR: No se puede detectar mayor o menor que entre strings");
+                                        }
+                                        break;
+                                    
+                                    case "<":
+                                        try {
+                                            //Convierte los comparadores a int
+                                            int compInt1 = Integer.parseInt(comp1);
+                                            int compInt2 = Integer.parseInt(comp2);
+
+                                            if (compInt1 > compInt2) {
+                                                for (int k = 0; k < newSepArg.size(); k++) {
+                                                    if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
+                                                        String expresion = newSepArg.get(k);
+                                                        int result = calc.ifAritmeticaParam1(expresion, newSepArg, parametro);
+                                                        System.out.println(result);
+                                                    }
+                                                }
                                             }
 
                                         } catch (NumberFormatException e) {
@@ -1199,7 +1226,71 @@ public class Interprete {
                         if (!error) {
                             for (int j = 0; j < newSepArg.size(); j++) {
                                 if (newSepArg.get(j).equals("if")) {
-        
+                                    String operator = newSepArg.get(j + 1);
+                                    //Toma los comparadores
+                                    String comp1 = newSepArg.get(j + 2);
+                                    String comp2 = newSepArg.get(j + 3);
+
+                                    switch (operator) {
+                                    //igual que
+                                    case "=":
+                                        if (comp1.equals(comp2)) {
+                                            for (int k = 0; k < newSepArg.size(); k++) {
+                                                if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
+                                                    System.out.println("LLEGO A EXPRESION DENTRO DEL IF");
+                                                    String expresion = newSepArg.get(k);
+                                                    int result = calc.ifAritmeticaParam2(expresion, newSepArg);
+                                                    System.out.println(result);
+                                                }
+                                            }
+                                        }
+                                        break;
+
+                                    //Mayor que
+                                    case ">":
+                                        try {
+                                            //Convierte los comparadores a int
+                                            int compInt1 = Integer.parseInt(comp1);
+                                            int compInt2 = Integer.parseInt(comp2);
+
+                                            if (compInt1 > compInt2) {
+                                                for (int k = 0; k < newSepArg.size(); k++) {
+                                                    if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
+                                                        String expresion = newSepArg.get(k);
+                                                        int result = calc.ifAritmeticaParam2(expresion, newSepArg);
+                                                        System.out.println(result);
+                                                    }
+                                                }
+                                            }
+
+                                        } catch (NumberFormatException e) {
+                                            System.out.println("ERROR: No se puede detectar mayor o menor que entre strings");
+                                        }
+                                        break;
+
+                                    case "<":
+                                        try {
+                                            //Convierte los comparadores a int
+                                            int compInt1 = Integer.parseInt(comp1);
+                                            int compInt2 = Integer.parseInt(comp2);
+
+                                            if (compInt1 < compInt2) {
+                                                for (int k = 0; k < newSepArg.size(); k++) {
+                                                    if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
+                                                        String expresion = newSepArg.get(k);
+                                                        int result = calc.ifAritmeticaParam2(expresion, newSepArg);
+                                                        System.out.println(result);
+                                                    }
+                                                }
+                                            }
+
+                                        } catch (NumberFormatException e) {
+                                            System.out.println("ERROR: No se puede detectar mayor o menor que entre strings");
+                                        }
+                                        break;
+
+                                    } //end of switch
+
                                 } else if (newSepArg.get(j).equals("+") || newSepArg.get(j).equals("r") || newSepArg.get(j).equals("*") || newSepArg.get(j).equals("/")) {
                                     //Expresion aritmetica con 2 parametros
                                     String expresion = newSepArg.get(j);
