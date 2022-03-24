@@ -1208,6 +1208,27 @@ public class Interprete {
                                         }
                                         break;
 
+                                    case "<":
+                                        try {
+                                            //Convierte los comparadores a int
+                                            int compInt1 = Integer.parseInt(comp1);
+                                            int compInt2 = Integer.parseInt(comp2);
+
+                                            if (compInt1 < compInt2) {
+                                                for (int k = 0; k < newSepArg.size(); k++) {
+                                                    if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
+                                                        String expresion = newSepArg.get(k);
+                                                        int result = calc.ifAritmeticaParam2(expresion, newSepArg);
+                                                        System.out.println(result);
+                                                    }
+                                                }
+                                            }
+
+                                        } catch (NumberFormatException e) {
+                                            System.out.println("ERROR: No se puede detectar mayor o menor que entre strings");
+                                        }
+                                        break;
+
                                     } //end of switch
 
                                 } else if (newSepArg.get(j).equals("+") || newSepArg.get(j).equals("r") || newSepArg.get(j).equals("*") || newSepArg.get(j).equals("/")) {
