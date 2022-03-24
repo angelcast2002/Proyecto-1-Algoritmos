@@ -57,6 +57,12 @@ public class Funciones {
         int result = 0;
         int add = 0;
 
+        for (int i = 0; i < newSepArg.size(); i++) {
+            if (newSepArg.get(i) != "+" || newSepArg.get(i) != "-" || newSepArg.get(i) != "*" || newSepArg.get(i) != "/" ) {
+                newSepArg.remove(i);
+            } 
+        }
+
         try {
                                                     
             switch (expresion) {
