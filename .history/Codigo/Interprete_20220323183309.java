@@ -941,36 +941,6 @@ public class Interprete {
                 break;
 
             case "ecuals":
-                String nom = comando[1];
-                String nom2 = comando[2];
-                Variable _var1 = null;
-                Variable _var2 = null;
-                
-                try{
-
-                    for(Variable variable : variables){
-                        if(variable.getNombre().equals(nom)){
-                            _var1 = variable;
-                        }
-                    }
-
-                    for(Variable variablee : variables){
-                        if(variablee.getNombre().equals(nom2)){
-                            _var2 = variablee;
-                        }
-                    }
-
-                    if(_var1.getValor().equals(_var2.getValor())){
-                        vista.print("T");
-                    }else {
-                        vista.print("nil");
-                        
-                    }
-
-                } catch(Exception e){
-                    vista.prinrErr("[!] Una o ambas variables no existen!");
-                    
-                }
                 break;
 
             case "eval":
@@ -987,7 +957,7 @@ public class Interprete {
                         num1 = Integer.parseInt(String.valueOf(aa));
                         num2 = Integer.parseInt(String.valueOf(ab));
                         System.out.println(num1 + num2);
-                    }else if(eval.charAt(1) == 'r'){
+                    }else if(eval.charAt(2) == '-'){
                         aa = eval.charAt(3);
                         ab = eval.charAt(5);
                         num1 = Integer.parseInt(String.valueOf(aa));
@@ -1006,12 +976,12 @@ public class Interprete {
                         num2 = Integer.parseInt(String.valueOf(ab));
                         System.out.println(num1 / num2);
                     }else{
-                        vista.prinrErr("[!] Comando no reconocido, intente con {+, r, *, /}");
+                        vista.prinrErr("[!] Comando no reconocido, intente con {+, -, *, /}");
                     }
                     
                 } catch (Exception e) {
                     //TODO: handle exception
-                    vista.prinrErr("[!] Comando no reconocido, intente con {+, r, *, /}");
+                    vista.prinrErr("[!] Comando no reconocido, intente con {+, -, *, /}");
                 }
                 
                 break;

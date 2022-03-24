@@ -941,36 +941,6 @@ public class Interprete {
                 break;
 
             case "ecuals":
-                String nom = comando[1];
-                String nom2 = comando[2];
-                Variable _var1 = null;
-                Variable _var2 = null;
-                
-                try{
-
-                    for(Variable variable : variables){
-                        if(variable.getNombre().equals(nom)){
-                            _var1 = variable;
-                        }
-                    }
-
-                    for(Variable variablee : variables){
-                        if(variablee.getNombre().equals(nom2)){
-                            _var2 = variablee;
-                        }
-                    }
-
-                    if(_var1.getValor().equals(_var2.getValor())){
-                        vista.print("T");
-                    }else {
-                        vista.print("nil");
-                        
-                    }
-
-                } catch(Exception e){
-                    vista.prinrErr("[!] Una o ambas variables no existen!");
-                    
-                }
                 break;
 
             case "eval":
