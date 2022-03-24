@@ -1023,19 +1023,12 @@ public class Interprete {
                             error = true;
                         }
 
-                        /*PARA RECURSIVIDAD WIP
+                        //PARA RECURSIVIDAD WIP
                         String nombreTemp = oldFuncion.getName();
                         if (newSepArg.contains(nombreTemp)) {
-                            for (int j = 0; j < newSepArg.size(); j++) {
-                                
-                                if (newSepArg.get(j).equals(nombreTemp)) {
-                                    newSepArg.set(j, arg1);
-                                }
-                                System.out.println("arg con recursivo " + newSepArg);
-
-                            }
+                            
                         }
-                        */
+
                         if (!error) {
                             for (int j = 0; j < sepArg.length; j++) {
                                 if (newSepArg.get(j).equals("if")) {
