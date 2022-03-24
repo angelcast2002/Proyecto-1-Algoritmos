@@ -961,62 +961,52 @@ public class Interprete {
             String nombreFuncion = comando[1];
             Funciones funcionExistente = null;
 
+            //Argumento
+            String argumento = "";
 
-            //Guardar lo que hace la funcion
-            String argumento = lista[2];
-            argumento = argumento.replace("(", "");
-            argumento = argumento.replace(")", "");
-            argumento = argumento.replace(" ", ",");
-            System.out.println("argumento " + argumento);
-            String arg1;
+            //Guardar lo que hace la funcion (si hay 3 elementos en lista, se esta creando la funcion)
+            if (lista.length == 3) {
+                argumento = lista[2];
+                argumento = argumento.replace("(", "");
+                argumento = argumento.replace(")", "");
+                argumento = argumento.replace(" ", ",");
+                System.out.println("argumento " + argumento);
+            }
 
             //EXISTE LA FUNCION, EVALUA LA FUNCION CON PARAMETROS DADOS
             for (Funciones funcionList : funciones) {
+
+                System.out.println("funcionlist name " + funcionList.getName());
                 if (funcionList.getName().equals(nombreFuncion)) {
 
-                    for (Funciones listFuncion : funciones) {
+                    String arg1 = funcionList.getArgus();
+                    System.out.println("argumento adentro del if " + arg1);
+                    String[] sepArg = arg1.split(",");
                     
-                        arg1 = listFuncion.getArgus();
-                        String[] sepArg = arg1.split(",");
-
-                        //Un parametro
-                        if (newSepParam.size() == 1) {
-
-                            String parametro = newSepParam.get(0);
-
-                        }
-
-                        for (int j = 0; j < sepArg.length; j++) {
-                            
-                            if (sepArg[j].equals("if")) {
-
-
-
-                            }
+                    //Un parametro
+                    if (newSepParam.size() == 1) {
+                        String parametro = newSepParam.get(0);
+                        System.out.println("parametro ahora " + parametro);
+                    }
+                    for (int j = 0; j < sepArg.length; j++) {
+                        if (sepArg[j].equals("if")) {
 
                         }
-
                     }
 
-                } 
-            }
-
-            //NO EXISTE LA FUNCION LA CREA
-
-            /*String[] sepFunc = funcion.split(",");
-
-            System.out.println("sep func " + Arrays.toString(sepFunc));
-            for (int k = 0; k < sepFunc.length; k++) {
-
-                if (sepFunc[k].equals("+") || sepFunc[k].equals("-")) {
-
-
-
+                } else {
+                    funciones.add(new Funciones(nombreFuncion, newSepParam, argumento));
                 }
-
             }
-            */
+
+            //NO EXISTE NINGUNA FUNCION
+            if (funciones.isEmpty()) {
                 
+                funciones.add(new Funciones(nombreFuncion, newSepParam, argumento)); 
+                System.out.println("se agrego la primera funcion");
+                
+            }
+
                 break;
 
             case "ecuals":
