@@ -1352,13 +1352,12 @@ public class Interprete {
                 break;
 
             case "eval":
-                
+                String eval = lista[1];
+                char aa = ' ';
+                char ab = ' ';
+                int num1 = 0;
+                int num2 = 0;
                 try {
-                    String eval = lista[1];
-                    char aa = ' ';
-                    char ab = ' ';
-                    int num1 = 0;
-                    int num2 = 0;
 
                     if(eval.charAt(1) == '+'){
                         aa = eval.charAt(3);
@@ -1504,40 +1503,34 @@ public class Interprete {
                 break;
 
             case "numberp":
-                try {
-                    String val = comando[1];
-                    Variable vall = null;
-                    String abc = "";
+
+            String val = comando[1];
+            Variable vall = null;
+            String abc = "";
 
 
-                    for(Variable varrr : variables){
-                        if(varrr.getNombre().equals(val)){
-                            vall = varrr;
-                            val = vall.getValor();
-                        }
-                    }
-
-                    if(vall == null){
-                        if(isNumber(val)){
-                            vista.print("T");
-                        }else{
-                            vista.print("nil");
-                        }
-                    }else{
-                        abc = vall.getValor().trim();
-
-                        if(isNumber(abc)){
-                            vista.print("T");
-                        }else{
-                            vista.print("nil");
-                        }
-                    }
-                    
-                } catch (Exception e) {
-                    //TODO: handle exception
-                    vista.prinrErr("[!] Error de sintaxis");
+            for(Variable varrr : variables){
+                if(varrr.getNombre().equals(val)){
+                    vall = varrr;
+                    val = vall.getValor();
                 }
-            
+            }
+
+            if(vall == null){
+                if(isNumber(val)){
+                    vista.print("T");
+                }else{
+                    vista.print("nil");
+                }
+            }else{
+                abc = vall.getValor().trim();
+
+                if(isNumber(abc)){
+                    vista.print("T");
+                }else{
+                    vista.print("nil");
+                }
+            }
                 break;
 
             }

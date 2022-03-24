@@ -1318,13 +1318,12 @@ public class Interprete {
                 break;
 
             case "ecuals":
-                
+                String nom = comando[1];
+                String nom2 = comando[2];
+                Variable _var1 = null;
+                Variable _var2 = null;
                 
                 try{
-                    String nom = comando[1];
-                    String nom2 = comando[2];
-                    Variable _var1 = null;
-                    Variable _var2 = null;
 
                     for(Variable variable : variables){
                         if(variable.getNombre().equals(nom)){
@@ -1352,13 +1351,12 @@ public class Interprete {
                 break;
 
             case "eval":
-                
+                String eval = lista[1];
+                char aa = ' ';
+                char ab = ' ';
+                int num1 = 0;
+                int num2 = 0;
                 try {
-                    String eval = lista[1];
-                    char aa = ' ';
-                    char ab = ' ';
-                    int num1 = 0;
-                    int num2 = 0;
 
                     if(eval.charAt(1) == '+'){
                         aa = eval.charAt(3);
@@ -1398,10 +1396,10 @@ public class Interprete {
             case "cond":
                 try {
                     
-                    String nom = comando[2];
-                    String nom2 = comando[3];
-                    Variable _var1 = null;
-                    Variable _var2 = null;
+                    nom = comando[2];
+                    nom2 = comando[3];
+                    _var1 = null;
+                    _var2 = null;
 
                     for(Variable variable : variables){
                         if(variable.getNombre().equals(nom)){
@@ -1504,40 +1502,34 @@ public class Interprete {
                 break;
 
             case "numberp":
-                try {
-                    String val = comando[1];
-                    Variable vall = null;
-                    String abc = "";
+
+            String val = comando[1];
+            Variable vall = null;
+            String abc = "";
 
 
-                    for(Variable varrr : variables){
-                        if(varrr.getNombre().equals(val)){
-                            vall = varrr;
-                            val = vall.getValor();
-                        }
-                    }
-
-                    if(vall == null){
-                        if(isNumber(val)){
-                            vista.print("T");
-                        }else{
-                            vista.print("nil");
-                        }
-                    }else{
-                        abc = vall.getValor().trim();
-
-                        if(isNumber(abc)){
-                            vista.print("T");
-                        }else{
-                            vista.print("nil");
-                        }
-                    }
-                    
-                } catch (Exception e) {
-                    //TODO: handle exception
-                    vista.prinrErr("[!] Error de sintaxis");
+            for(Variable varrr : variables){
+                if(varrr.getNombre().equals(val)){
+                    vall = varrr;
+                    val = vall.getValor();
                 }
-            
+            }
+
+            if(vall == null){
+                if(isNumber(val)){
+                    vista.print("T");
+                }else{
+                    vista.print("nil");
+                }
+            }else{
+                abc = vall.getValor().trim();
+
+                if(isNumber(abc)){
+                    vista.print("T");
+                }else{
+                    vista.print("nil");
+                }
+            }
                 break;
 
             }

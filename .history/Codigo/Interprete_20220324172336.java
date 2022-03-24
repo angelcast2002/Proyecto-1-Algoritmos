@@ -1352,13 +1352,12 @@ public class Interprete {
                 break;
 
             case "eval":
-                
+                String eval = lista[1];
+                char aa = ' ';
+                char ab = ' ';
+                int num1 = 0;
+                int num2 = 0;
                 try {
-                    String eval = lista[1];
-                    char aa = ' ';
-                    char ab = ' ';
-                    int num1 = 0;
-                    int num2 = 0;
 
                     if(eval.charAt(1) == '+'){
                         aa = eval.charAt(3);
