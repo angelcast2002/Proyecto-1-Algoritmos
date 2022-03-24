@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.ListIterator;
 
 public class Funciones {
     
@@ -49,6 +50,60 @@ public class Funciones {
 
         
 
+    }
+
+    public int expresionesAritmeticasParam1(String expresion, ArrayList<String> newSepArg, String parametro) {
+        int sum = 0;
+        int result = 0;
+        int add = 0;
+
+        try {
+                                                    
+            switch (expresion) {
+                case "+":
+                for (int l = 1; l < newSepArg.size(); l++) {
+                    add += 1;
+                    sum += Integer.parseInt(newSepArg.get(add));
+                }
+                result = sum;
+                break;
+
+                case "r":
+                add = 1;
+                sum = Integer.parseInt(parametro);
+                for (int l = 0; l < newSepArg.size() - 2; l++) {
+                    add += 1;
+                    sum = sum - Integer.parseInt(newSepArg.get(add));
+                }
+                result = sum;
+                break;
+
+                case "*":
+                add = 1;
+                sum = Integer.parseInt(parametro);
+                for (int l = 0; l < newSepArg.size() - 2; l++) {
+                    add += 1;
+                    sum = sum * Integer.parseInt(newSepArg.get(add));
+                }
+                result = sum;
+                break;
+
+                case "/":
+                add = 1;
+                sum = Integer.parseInt(parametro);
+                for (int l = 0; l < newSepArg.size() - 2; l++) {
+                    add += 1;
+                    sum = sum / Integer.parseInt(newSepArg.get(add));
+                }
+                result = sum;
+                break;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("ERROR " + "el interprete no puede operar strings");
+        }
+
+        return result;
+        
     }
 
 }
