@@ -1143,7 +1143,7 @@ public class Interprete {
                                 } else if (newSepArg.get(j).equals("+") || newSepArg.get(j).equals("r") || newSepArg.get(j).equals("*") || newSepArg.get(j).equals("/")) {
                                     //Expresion aritmetica con 2 parametros
                                     String expresion = newSepArg.get(j);
-                                    int result = calc.aritmeticaParams2(expresion, newSepArg);
+                                    int result = calc.aritmeticaParam2(expresion, newSepArg);
                                     System.out.println(result);
                                 } //fin de argumento siendo expresion aritmetica
                             }
