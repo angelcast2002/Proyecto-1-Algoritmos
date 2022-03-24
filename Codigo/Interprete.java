@@ -959,7 +959,7 @@ public class Interprete {
             //Guardar nombre funcion
             String nombreFuncion = comando[1];
 
-            //Argumento
+            //Se inicializa argumento
             String argumento = "";
 
             //Guardar lo que hace la funcion (si hay 3 elementos en lista, se esta creando la funcion)
@@ -1017,40 +1017,65 @@ public class Interprete {
                             }
     
                         }
-    
+
+                        /*PARA RECURSIVIDAD WIP
+                        String nombreTemp = oldFuncion.getName();
+                        if (newSepArg.contains(nombreTemp)) {
+                            for (int j = 0; j < newSepArg.size(); j++) {
+                                
+                                if (newSepArg.get(j).equals(nombreTemp)) {
+                                    newSepArg.set(j, arg1);
+                                }
+                                System.out.println("arg con recursivo " + newSepArg);
+
+                            }
+                        }
+                        */
+
                         for (int j = 0; j < sepArg.length; j++) {
                             if (newSepArg.get(j).equals("if")) {
     
-                            } else if (newSepArg.get(j).equals("+") || newSepArg.get(j).equals("-") || newSepArg.get(j).equals("*") || newSepArg.get(j).equals("/")) {
+                            } else if (newSepArg.get(j).equals("+") || newSepArg.get(j).equals("r") || newSepArg.get(j).equals("*") || newSepArg.get(j).equals("/")) {
                                 //Expresion aritmetica
                                 String expresion = newSepArg.get(j);
     
                                 try {
-                                    int num1 = Integer.parseInt(newSepArg.get(j + 1));
-                                    int num2 = Integer.parseInt(newSepArg.get(j + 2));
+
+                                    int sum = 0;
                                     int result = 0;
+                                    int add = 0;
                                     switch (expresion) {
                                         case "+":
-                                        result = num1 + num2;
+                                        for (int k = 1; k < newSepArg.size(); k++) {
+                                            add += 1;
+                                            sum += Integer.parseInt(newSepArg.get(add));
+                                        }
+                                        result = sum;
                                         break;
     
-                                        case "-":
-                                        result = num1 - num2;
+                                        case "r":
+                                        add = 1;
+                                        sum = Integer.parseInt(parametro);
+                                        for (int k = 0; k < newSepArg.size() - 2; k++) {
+                                            add += 1;
+                                            sum = sum - Integer.parseInt(newSepArg.get(add));
+                                        }
+                                        result = sum;
                                         break;
     
                                         case "*":
-                                        result = num1 * num2;
+                                        result = sum;
                                         break;
     
                                         case "/":
-                                        result = num1 / num2;
+                                        result = sum;
                                         break;
                                     }
                                     System.out.println(result);
                                 } catch (NumberFormatException e) {
                                     System.out.println("ERROR " + "el interprete no puede operar strings");
                                 }
-                            }
+                            } //fin de argumento siendo expresion aritmetica
                         }
                     }
 
