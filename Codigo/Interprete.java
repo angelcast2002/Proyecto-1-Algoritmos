@@ -1021,7 +1021,10 @@ public class Interprete {
                     }
                     newSepArg.removeAll(Arrays.asList(null," "));
     
-                    //Funcion de 1 parametro
+                    //FUNCION DE 1 PARAMETRO
+                    //
+                    //
+                    //FUNCION DE 1 PARAMETRO
                     if (newSepParam.size() == 1) {
                         String parametro = newSepParam.get(0);
     
@@ -1044,8 +1047,19 @@ public class Interprete {
                             error = true;
                         }
 
-                        //PARA RECURSIVIDAD WIP
+                        //PARA RECURSIVIDAD UN PARAMETRO
                         String nombreTemp = nombreFuncion;
+
+                        for (int j = 0; j < newSepArg.size(); j++) {
+                            if (newSepArg.get(j).equals(nombreTemp)) {
+                                for (int l = 0; l < j; l++) {
+                                    if(newSepArg.get(l).equals("+") || newSepArg.get(l).equals("-") || newSepArg.get(l).equals("*") || newSepArg.get(l).equals("/")) {
+                                    } else {
+                                        newSepArg.add(newSepArg.get(l));
+                                    }
+                                }
+                            }
+                        }
 
                         if (newSepArg.contains(nombreFuncion)) {
                             //encuentra el parametro en el argumento
@@ -1053,11 +1067,11 @@ public class Interprete {
                             while (iterator.hasNext()) {
                                 String next = iterator.next();
                                 if (next.equals(nombreTemp)) {
-                                    iterator.set("");
+                                    iterator.remove();
                                 }
                             }
                         }
-
+                        //FIN DE RECURSIVIDAD UN PARAMETRO
 
                         if (!error) {
                             for (int j = 0; j < newSepArg.size(); j++) {
@@ -1112,6 +1126,11 @@ public class Interprete {
                                 } //fin de argumento siendo expresion aritmetica
                             }
                         }     
+
+                    //FUNCION DE 2 PARAMETROS
+                    //
+                    //
+                    //FUNCION DE 2 PARAMETROS
                     } else if (newSepParam.size() == 2) { //Funcion de dos parametros
 
                         String parametro1 = newSepParam.get(0);
@@ -1140,8 +1159,31 @@ public class Interprete {
                             error = true;
                         }
 
-                        //PARA RECURSIVIDAD WIP
+                        //PARA RECURSIVIDAD DOS PARAMETROS
                         String nombreTemp = nombreFuncion;
+
+                        for (int j = 0; j < newSepArg.size(); j++) {
+                            if (newSepArg.get(j).equals(nombreTemp)) {
+                                for (int l = 0; l < j; l++) {
+                                    if(newSepArg.get(l).equals("+") || newSepArg.get(l).equals("-") || newSepArg.get(l).equals("*") || newSepArg.get(l).equals("/")) {
+                                    } else {
+                                        newSepArg.add(newSepArg.get(l));
+                                    }
+                                }
+                            }
+                        }
+
+                        if (newSepArg.contains(nombreFuncion)) {
+                            //encuentra el parametro en el argumento
+                            ListIterator<String> iterator = newSepArg.listIterator();
+                            while (iterator.hasNext()) {
+                                String next = iterator.next();
+                                if (next.equals(nombreTemp)) {
+                                    iterator.remove();
+                                }
+                            }
+                        }
+                        //FIN RECURSIVIDAD 2 PARAMETROS
 
                         if (newSepArg.contains(nombreFuncion)) {
                             //encuentra el parametro en el argumento
