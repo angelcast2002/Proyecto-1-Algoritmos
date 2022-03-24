@@ -1118,26 +1118,28 @@ public class Interprete {
                                             System.out.println("ERROR: No se puede detectar mayor o menor que entre strings");
                                         }
                                         break;
-                                        
+                                    
                                     case "<":
-                                    try {
-                                        //Convierte los comparadores a int
-                                        int compInt1 = Integer.parseInt(comp1);
-                                        int compInt2 = Integer.parseInt(comp2);
+                                        try {
+                                            //Convierte los comparadores a int
+                                            int compInt1 = Integer.parseInt(comp1);
+                                            int compInt2 = Integer.parseInt(comp2);
 
-                                        if (compInt1 < compInt2) {
-                                            for (int k = 0; k < newSepArg.size(); k++) {
-                                                if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
-                                                    String expresion = newSepArg.get(k);
-                                                    int result = calc.ifAritmeticaParam1(expresion, newSepArg, parametro);
-                                                    System.out.println(result);
+                                            if (compInt1 > compInt2) {
+                                                for (int k = 0; k < newSepArg.size(); k++) {
+                                                    if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
+                                                        String expresion = newSepArg.get(k);
+                                                        int result = calc.ifAritmeticaParam1(expresion, newSepArg, parametro);
+                                                        System.out.println(result);
+                                                    }
                                                 }
                                             }
-                                        }
 
-                                    } catch (NumberFormatException e) {
-                                        System.out.println("ERROR: No se puede detectar mayor o menor que entre strings");
-                                    }
+                                        } catch (NumberFormatException e) {
+                                            System.out.println("ERROR: No se puede detectar mayor o menor que entre strings");
+                                        }
+                                        break;
+
                                     } //fin del switch operator
 
 
@@ -1319,11 +1321,12 @@ public class Interprete {
                 
                 
                 try{
+
                     String nom = comando[1];
                     String nom2 = comando[2];
                     Variable _var1 = null;
                     Variable _var2 = null;
-
+                    
                     for(Variable variable : variables){
                         if(variable.getNombre().equals(nom)){
                             _var1 = variable;
@@ -1350,13 +1353,12 @@ public class Interprete {
                 break;
 
             case "eval":
-                
+                String eval = lista[1];
+                char aa = ' ';
+                char ab = ' ';
+                int num1 = 0;
+                int num2 = 0;
                 try {
-                    String eval = lista[1];
-                    char aa = ' ';
-                    char ab = ' ';
-                    int num1 = 0;
-                    int num2 = 0;
 
                     if(eval.charAt(1) == '+'){
                         aa = eval.charAt(3);
@@ -1396,10 +1398,10 @@ public class Interprete {
             case "cond":
                 try {
                     
-                    String nom = comando[2];
-                    String nom2 = comando[3];
-                    Variable _var1 = null;
-                    Variable _var2 = null;
+                    nom = comando[2];
+                    nom2 = comando[3];
+                    _var1 = null;
+                    _var2 = null;
 
                     for(Variable variable : variables){
                         if(variable.getNombre().equals(nom)){
@@ -1502,40 +1504,34 @@ public class Interprete {
                 break;
 
             case "numberp":
-                try {
-                    String val = comando[1];
-                    Variable vall = null;
-                    String abc = "";
+
+            String val = comando[1];
+            Variable vall = null;
+            String abc = "";
 
 
-                    for(Variable varrr : variables){
-                        if(varrr.getNombre().equals(val)){
-                            vall = varrr;
-                            val = vall.getValor();
-                        }
-                    }
-
-                    if(vall == null){
-                        if(isNumber(val)){
-                            vista.print("T");
-                        }else{
-                            vista.print("nil");
-                        }
-                    }else{
-                        abc = vall.getValor().trim();
-
-                        if(isNumber(abc)){
-                            vista.print("T");
-                        }else{
-                            vista.print("nil");
-                        }
-                    }
-                    
-                } catch (Exception e) {
-                    //TODO: handle exception
-                    vista.prinrErr("[!] Error de sintaxis");
+            for(Variable varrr : variables){
+                if(varrr.getNombre().equals(val)){
+                    vall = varrr;
+                    val = vall.getValor();
                 }
-            
+            }
+
+            if(vall == null){
+                if(isNumber(val)){
+                    vista.print("T");
+                }else{
+                    vista.print("nil");
+                }
+            }else{
+                abc = vall.getValor().trim();
+
+                if(isNumber(abc)){
+                    vista.print("T");
+                }else{
+                    vista.print("nil");
+                }
+            }
                 break;
 
             }
