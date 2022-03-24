@@ -940,6 +940,83 @@ public class Interprete {
                 break;
 
             case "defun":
+            
+            //Guardar los parametros
+            String parametros = lista[1];
+            parametros = parametros.replace("(", "");
+            parametros = parametros.replace(")", "");
+            parametros = parametros.replace(" ", ",");
+            System.out.println("parametros " + parametros + "x");
+
+            String[] sepParam = parametros.split(",");
+            ArrayList<String> newSepParam = new ArrayList<>();
+            for (int j = 0; j < sepParam.length; j++) {
+                newSepParam.add(sepParam[j]); 
+            }
+            newSepParam.removeAll(Arrays.asList(null," "));
+            System.out.println("sep param " + newSepParam + " " + newSepParam.size());
+
+
+            //Guardar nombre funcion
+            String nombreFuncion = comando[1];
+            Funciones funcionExistente = null;
+
+
+            //Guardar lo que hace la funcion
+            String argumento = lista[2];
+            argumento = argumento.replace("(", "");
+            argumento = argumento.replace(")", "");
+            argumento = argumento.replace(" ", ",");
+            System.out.println("argumento " + argumento);
+            String arg1;
+
+            //EXISTE LA FUNCION, EVALUA LA FUNCION CON PARAMETROS DADOS
+            for (Funciones funcionList : funciones) {
+                if (funcionList.getName().equals(nombreFuncion)) {
+
+                    for (Funciones listFuncion : funciones) {
+                    
+                        arg1 = listFuncion.getArgus();
+                        String[] sepArg = arg1.split(",");
+
+                        //Un parametro
+                        if (newSepParam.size() == 1) {
+
+                            String parametro = newSepParam.get(0);
+
+                        }
+
+                        for (int j = 0; j < sepArg.length; j++) {
+                            
+                            if (sepArg[j].equals("if")) {
+
+
+
+                            }
+
+                        }
+
+                    }
+
+                } 
+            }
+
+            //NO EXISTE LA FUNCION LA CREA
+
+            /*String[] sepFunc = funcion.split(",");
+
+            System.out.println("sep func " + Arrays.toString(sepFunc));
+            for (int k = 0; k < sepFunc.length; k++) {
+
+                if (sepFunc[k].equals("+") || sepFunc[k].equals("-")) {
+
+
+
+                }
+
+            }
+            */
+                
                 break;
 
             case "ecuals":
