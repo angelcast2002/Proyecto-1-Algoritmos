@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.Arrays;
 
 public class Interprete {
 
@@ -10,6 +11,7 @@ public class Interprete {
     String instruccion = "";
     
     List<Variable> variables = new ArrayList<>();
+    List<Funciones> funciones = new ArrayList<>();
 
     public void ejecutar() {
 
