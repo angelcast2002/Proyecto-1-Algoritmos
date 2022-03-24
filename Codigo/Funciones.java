@@ -106,7 +106,7 @@ public class Funciones {
         
     }
 
-    public int aritmeticaParam2(String expresion, ArrayList<String> newSepArg, String parametro) {
+    public int aritmeticaParam2(String expresion, ArrayList<String> newSepArg) {
         int sum = 0;
         int result = 0;
         int add = 0;
