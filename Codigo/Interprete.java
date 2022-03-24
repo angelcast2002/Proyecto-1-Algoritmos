@@ -1038,7 +1038,7 @@ public class Interprete {
                         }
 
                         if (!error) {
-                            for (int j = 0; j < sepArg.length; j++) {
+                            for (int j = 0; j < newSepArg.size(); j++) {
                                 if (newSepArg.get(j).equals("if")) {
         
                                 } else if (newSepArg.get(j).equals("+") || newSepArg.get(j).equals("r") || newSepArg.get(j).equals("*") || newSepArg.get(j).equals("/")) {
@@ -1098,9 +1098,107 @@ public class Interprete {
                         }     
                     } else if (newSepParam.size() == 2) { //Funcion de dos parametros
 
-                    } else {
+                        String parametro1 = newSepParam.get(0);
+                        String parametro2 = newSepParam.get(1);
 
-                    }
+                        //parametro temporal para evaluar funcion (defun suma (a) (+ a 10)) parametro temporal es a
+                        String tempParam1 = oldFuncion.getParams().get(0);
+                        String tempParam2 = oldFuncion.getParams().get(1);
+                        //si el argumento contiene el parametro temporal
+                        if (newSepArg.contains(tempParam1) && newSepArg.contains(tempParam2)) {
+                            //encuentra el parametro en el argumento
+                            ListIterator<String> iterator = newSepArg.listIterator();
+                            while (iterator.hasNext()) {
+                                String next = iterator.next();
+                                if (next.equals(tempParam1)) {
+                                    //cambia el parametro temporal 1 dentro del argumento por el parametro ingresado para evaluar la funcion
+                                    iterator.set(parametro1);
+                                }
+                                if (next.equals(tempParam2)) {
+                                    iterator.set(parametro2);
+                                }
+                            }
+    
+                        } else {
+                            System.out.println("ERROR: Los parametros no se encuentran en el argumento de la funcion");
+                            error = true;
+                        }
+
+                        //PARA RECURSIVIDAD WIP
+                        String nombreTemp = nombreFuncion;
+
+                        if (newSepArg.contains(nombreFuncion)) {
+                            //encuentra el parametro en el argumento
+                            ListIterator<String> iterator = newSepArg.listIterator();
+                            while (iterator.hasNext()) {
+                                String next = iterator.next();
+                                if (next.equals(nombreTemp)) {
+                                    iterator.set("");
+                                }
+                            }
+                        }
+
+                        if (!error) {
+                            for (int j = 0; j < newSepArg.size(); j++) {
+                                if (newSepArg.get(j).equals("if")) {
+        
+                                } else if (newSepArg.get(j).equals("+") || newSepArg.get(j).equals("r") || newSepArg.get(j).equals("*") || newSepArg.get(j).equals("/")) {
+                                    //Expresion aritmetica
+                                    String expresion = newSepArg.get(j);
+        
+                                    try {
+    
+                                        int sum = 0;
+                                        int result = 0;
+                                        int add = 0;
+                                        switch (expresion) {
+                                            case "+":
+                                            for (int k = 1; k < newSepArg.size(); k++) {
+                                                add += 1;
+                                                sum += Integer.parseInt(newSepArg.get(add));
+                                            }
+                                            result = sum;
+                                            break;
+        
+                                            case "r":
+                                            add = 1;
+                                            sum = Integer.parseInt(newSepArg.get(1));
+                                            for (int k = 0; k < newSepArg.size() - 2; k++) {
+                                                add += 1;
+                                                sum = sum - Integer.parseInt(newSepArg.get(add));
+                                            }
+                                            result = sum;
+                                            break;
+        
+                                            case "*":
+                                            add = 1;
+                                            sum = Integer.parseInt(newSepArg.get(1));
+                                            System.out.println(newSepArg);
+                                            for (int k = 0; k < newSepArg.size() - 2; k++) {
+                                                add += 1;
+                                                sum = sum * Integer.parseInt(newSepArg.get(add));
+                                            }
+                                            result = sum;
+                                            break;
+        
+                                            case "/":
+                                            add = 1;
+                                            sum = Integer.parseInt(newSepArg.get(1));
+                                            for (int k = 0; k < newSepArg.size() - 2; k++) {
+                                                add += 1;
+                                                sum = sum / Integer.parseInt(newSepArg.get(add));
+                                            }
+                                            result = sum;
+                                            break;
+                                        }
+                                        System.out.println(result);
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("ERROR " + "el interprete no puede operar strings");
+                                    }
+                                } //fin de argumento siendo expresion aritmetica
+                            }
+                        }
+                    } 
                 }
 
             } else {
