@@ -52,7 +52,7 @@ public class Interprete {
         instruccion = instruccion.trim();
         instruccion = instruccion.substring(0, instruccion.length() - 1);
         instruccion = instruccion.substring(1);
-        instruccion = instruccion.replace("'(", "-");
+        // instruccion = instruccion.replace("'(", "-");
 
         String[] lista = instruccion.split("(?=\\()|(?=-)");
         
@@ -60,7 +60,7 @@ public class Interprete {
         for (int i = 0; i < lista.length; i++) {
 
             String orden = lista[i];
-            orden = orden.replace("-", "'(");
+            // orden = orden.replace("-", "'(");
             
             String[] comando = orden.split(" ");
             
@@ -957,7 +957,7 @@ public class Interprete {
                         num1 = Integer.parseInt(String.valueOf(aa));
                         num2 = Integer.parseInt(String.valueOf(ab));
                         System.out.println(num1 + num2);
-                    }else if(eval.charAt(1) == 'r'){
+                    }else if(eval.charAt(1) == '-'){
                         aa = eval.charAt(3);
                         ab = eval.charAt(5);
                         num1 = Integer.parseInt(String.valueOf(aa));

@@ -52,7 +52,7 @@ public class Interprete {
         instruccion = instruccion.trim();
         instruccion = instruccion.substring(0, instruccion.length() - 1);
         instruccion = instruccion.substring(1);
-        instruccion = instruccion.replace("'(", "-");
+        // instruccion = instruccion.replace("'(", "-");
 
         String[] lista = instruccion.split("(?=\\()|(?=-)");
         
@@ -60,7 +60,7 @@ public class Interprete {
         for (int i = 0; i < lista.length; i++) {
 
             String orden = lista[i];
-            orden = orden.replace("-", "'(");
+            // orden = orden.replace("-", "'(");
             
             String[] comando = orden.split(" ");
             
