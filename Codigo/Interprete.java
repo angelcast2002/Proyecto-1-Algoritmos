@@ -1024,9 +1024,17 @@ public class Interprete {
                         }
 
                         //PARA RECURSIVIDAD WIP
-                        String nombreTemp = oldFuncion.getName();
-                        if (newSepArg.contains(nombreTemp)) {
-                            
+                        String nombreTemp = nombreFuncion;
+
+                        if (newSepArg.contains(nombreFuncion)) {
+                            //encuentra el parametro en el argumento
+                            ListIterator<String> iterator = newSepArg.listIterator();
+                            while (iterator.hasNext()) {
+                                String next = iterator.next();
+                                if (next.equals(nombreTemp)) {
+                                    iterator.set("");
+                                }
+                            }
                         }
 
                         if (!error) {
@@ -1088,6 +1096,10 @@ public class Interprete {
                                 } //fin de argumento siendo expresion aritmetica
                             }
                         }     
+                    } else if (newSepParam.size() == 2) { //Funcion de dos parametros
+
+                    } else {
+
                     }
                 }
 
