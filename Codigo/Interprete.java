@@ -1064,6 +1064,12 @@ public class Interprete {
                                         break;
     
                                         case "*":
+                                        add = 1;
+                                        sum = Integer.parseInt(parametro);
+                                        for (int k = 0; k < newSepArg.size() - 2; k++) {
+                                            add += 1;
+                                            sum = sum * Integer.parseInt(newSepArg.get(add));
+                                        }
                                         result = sum;
                                         break;
     
