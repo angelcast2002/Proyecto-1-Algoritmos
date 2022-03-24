@@ -112,7 +112,7 @@ public class Funciones {
         int add = 0;
 
         for (int i = 0; i < newSepArg.size(); i++) {
-            if (newSepArg.get(i) != "+" || newSepArg.get(i) != "-" || newSepArg.get(i) != "*" || newSepArg.get(i) != "/" ) {
+            if (newSepArg.get(i) != "+" && newSepArg.get(i) != "r" && newSepArg.get(i) != "*" && newSepArg.get(i) != "/" ) {
                 newSepArg.remove(i);
             } 
         }
@@ -226,7 +226,7 @@ public class Funciones {
         int add = 0;
 
         for (int i = 0; i < newSepArg.size(); i++) {
-            if (newSepArg.get(i) != "+" || newSepArg.get(i) != "-" || newSepArg.get(i) != "*" || newSepArg.get(i) != "/" ) {
+            if (newSepArg.get(i) != "+" && newSepArg.get(i) != "r" && newSepArg.get(i) != "*" && newSepArg.get(i) != "/" ) {
                 newSepArg.remove(i);
             } 
         }
