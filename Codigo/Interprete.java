@@ -973,30 +973,38 @@ public class Interprete {
                 System.out.println("argumento " + argumento);
             }
 
-            //EXISTE LA FUNCION, EVALUA LA FUNCION CON PARAMETROS DADOS
+            //Evalua si ya existe la funcion 
+            boolean existeFuncion = false;
+            Funciones oldFuncion = null;
             for (Funciones funcionList : funciones) {
 
-                System.out.println("funcionlist name " + funcionList.getName());
                 if (funcionList.getName().equals(nombreFuncion)) {
-
-                    String arg1 = funcionList.getArgus();
-                    System.out.println("argumento adentro del if " + arg1);
-                    String[] sepArg = arg1.split(",");
-                    
-                    //Un parametro
-                    if (newSepParam.size() == 1) {
-                        String parametro = newSepParam.get(0);
-                        System.out.println("parametro ahora " + parametro);
-                    }
-                    for (int j = 0; j < sepArg.length; j++) {
-                        if (sepArg[j].equals("if")) {
-
-                        }
-                    }
-
-                } else {
-                    funciones.add(new Funciones(nombreFuncion, newSepParam, argumento));
+                    existeFuncion = true;
+                    oldFuncion = funcionList;
                 }
+                
+            }
+
+            //EXISTE LA FUNCION, EVALUA LA FUNCION CON PARAMETROS DADOS
+            if (existeFuncion) {
+
+                String arg1 = oldFuncion.getArgus();
+                System.out.println("argumento adentro del if " + arg1);
+                String[] sepArg = arg1.split(",");
+                
+                //Un parametro
+                if (newSepParam.size() == 1) {
+                    String parametro = newSepParam.get(0);
+                    System.out.println("parametro ahora " + parametro);
+                }
+                for (int j = 0; j < sepArg.length; j++) {
+                    if (sepArg[j].equals("if")) {
+
+                    }
+                }
+
+            } else {
+                funciones.add(new Funciones(nombreFuncion, newSepParam, argumento));
             }
 
             //NO EXISTE NINGUNA FUNCION
