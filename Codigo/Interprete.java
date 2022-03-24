@@ -1037,10 +1037,46 @@ public class Interprete {
                             }
                         }
 
+                        System.out.println("argumento con if " + newSepArg);
                         if (!error) {
                             for (int j = 0; j < newSepArg.size(); j++) {
+                                //hay un if
                                 if (newSepArg.get(j).equals("if")) {
-        
+                                    //Toma el operador luego del if
+                                    String operator = newSepArg.get(j + 1);
+                                    //Toma los comparadores
+                                    String comp1 = newSepArg.get(j + 2);
+                                    String comp2 = newSepArg.get(j + 3);
+
+                                    switch (operator) {
+                                    //igual que
+                                    case "=":
+                                        if (comp1.equals(comp2)) {
+                                            for (int k = j + 4; k < newSepArg.size(); k++) {
+                                                
+                                            }
+                                        }
+                                        break;
+
+                                    //Mayor que
+                                    case ">":
+                                        try {
+                                            //Convierte los comparadores a int
+                                            int compInt1 = Integer.parseInt(comp1);
+                                            int compInt2 = Integer.parseInt(comp2);
+
+                                            if (compInt1 > compInt2) {
+
+                                            }
+
+                                        } catch (NumberFormatException e) {
+                                            System.out.println("ERROR: No se puede detectar mayor o menor que entre strings");
+                                        }
+                                        break;
+
+                                    } //fin del switch operator
+
+
                                 } else if (newSepArg.get(j).equals("+") || newSepArg.get(j).equals("r") || newSepArg.get(j).equals("*") || newSepArg.get(j).equals("/")) {
                                     //Expresion aritmetica
                                     String expresion = newSepArg.get(j);
