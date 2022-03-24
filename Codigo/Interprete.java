@@ -2,6 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.Arrays;
+import java.util.ListIterator;
 
 public class Interprete {
 
@@ -946,7 +947,6 @@ public class Interprete {
             parametros = parametros.replace("(", "");
             parametros = parametros.replace(")", "");
             parametros = parametros.replace(" ", ",");
-            System.out.println("parametros " + parametros + "x");
 
             String[] sepParam = parametros.split(",");
             ArrayList<String> newSepParam = new ArrayList<>();
@@ -954,12 +954,10 @@ public class Interprete {
                 newSepParam.add(sepParam[j]); 
             }
             newSepParam.removeAll(Arrays.asList(null," "));
-            System.out.println("sep param " + newSepParam + " " + newSepParam.size());
 
 
             //Guardar nombre funcion
             String nombreFuncion = comando[1];
-            Funciones funcionExistente = null;
 
             //Argumento
             String argumento = "";
@@ -970,7 +968,6 @@ public class Interprete {
                 argumento = argumento.replace("(", "");
                 argumento = argumento.replace(")", "");
                 argumento = argumento.replace(" ", ",");
-                System.out.println("argumento " + argumento);
             }
 
             //Evalua si ya existe la funcion 
@@ -982,28 +979,77 @@ public class Interprete {
                     existeFuncion = true;
                     oldFuncion = funcionList;
                 }
-                
+
             }
 
             //EXISTE LA FUNCION, EVALUA LA FUNCION CON PARAMETROS DADOS
             if (existeFuncion) {
 
                 String arg1 = oldFuncion.getArgus();
-                System.out.println("argumento adentro del if " + arg1);
                 String[] sepArg = arg1.split(",");
-                
+                ArrayList<String> newSepArg = new ArrayList<>();
+                for (int j = 0; j < sepArg.length; j++) {
+                    newSepArg.add(sepArg[j]); 
+                }
+                newSepArg.removeAll(Arrays.asList(null," "));
+
                 //Un parametro
                 if (newSepParam.size() == 1) {
                     String parametro = newSepParam.get(0);
-                    System.out.println("parametro ahora " + parametro);
-                }
-                for (int j = 0; j < sepArg.length; j++) {
-                    if (sepArg[j].equals("if")) {
+
+                    //parametro temporal para evaluar funcion (defun suma (a) (+ a 10)) parametro temporal es a
+                    String tempParam = oldFuncion.getParams().get(0);
+                    //si el argumento contiene el parametro temporal
+                    if (newSepArg.contains(tempParam)) {
+
+                        //encuentra el parametro en el argumento
+                        ListIterator<String> iterator = newSepArg.listIterator();
+                        while (iterator.hasNext()) {
+                            String next = iterator.next();
+                            if (next.equals(tempParam)) {
+                                iterator.set(parametro);
+                            }
+                        }
 
                     }
-                }
 
+                    for (int j = 0; j < sepArg.length; j++) {
+                        if (newSepArg.get(j).equals("if")) {
+
+                        } else if (newSepArg.get(j).equals("+") || newSepArg.get(j).equals("-") || newSepArg.get(j).equals("*") || newSepArg.get(j).equals("/")) {
+                            //Expresion aritmetica
+                            String expresion = newSepArg.get(j);
+
+                            try {
+                                int num1 = Integer.parseInt(newSepArg.get(j + 1));
+                                int num2 = Integer.parseInt(newSepArg.get(j + 2));
+                                int result = 0;
+                                switch (expresion) {
+                                    case "+":
+                                    result = num1 + num2;
+                                    break;
+
+                                    case "-":
+                                    result = num1 - num2;
+                                    break;
+
+                                    case "*":
+                                    result = num1 * num2;
+                                    break;
+
+                                    case "/":
+                                    result = num1 / num2;
+                                    break;
+                                }
+                                System.out.println(result);
+                            } catch (NumberFormatException e) {
+                                System.out.println("ERROR " + "el interprete no puede operar strings");
+                            }
+                        }
+                    }
+                }
             } else {
+                //NO EXISTE LA FUNCION
                 funciones.add(new Funciones(nombreFuncion, newSepParam, argumento));
             }
 
