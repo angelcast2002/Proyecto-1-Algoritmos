@@ -1141,58 +1141,10 @@ public class Interprete {
                                 if (newSepArg.get(j).equals("if")) {
         
                                 } else if (newSepArg.get(j).equals("+") || newSepArg.get(j).equals("r") || newSepArg.get(j).equals("*") || newSepArg.get(j).equals("/")) {
-                                    //Expresion aritmetica
+                                    //Expresion aritmetica con 2 parametros
                                     String expresion = newSepArg.get(j);
-        
-                                    try {
-    
-                                        int sum = 0;
-                                        int result = 0;
-                                        int add = 0;
-                                        switch (expresion) {
-                                            case "+":
-                                            for (int k = 1; k < newSepArg.size(); k++) {
-                                                add += 1;
-                                                sum += Integer.parseInt(newSepArg.get(add));
-                                            }
-                                            result = sum;
-                                            break;
-        
-                                            case "r":
-                                            add = 1;
-                                            sum = Integer.parseInt(newSepArg.get(1));
-                                            for (int k = 0; k < newSepArg.size() - 2; k++) {
-                                                add += 1;
-                                                sum = sum - Integer.parseInt(newSepArg.get(add));
-                                            }
-                                            result = sum;
-                                            break;
-        
-                                            case "*":
-                                            add = 1;
-                                            sum = Integer.parseInt(newSepArg.get(1));
-                                            System.out.println(newSepArg);
-                                            for (int k = 0; k < newSepArg.size() - 2; k++) {
-                                                add += 1;
-                                                sum = sum * Integer.parseInt(newSepArg.get(add));
-                                            }
-                                            result = sum;
-                                            break;
-        
-                                            case "/":
-                                            add = 1;
-                                            sum = Integer.parseInt(newSepArg.get(1));
-                                            for (int k = 0; k < newSepArg.size() - 2; k++) {
-                                                add += 1;
-                                                sum = sum / Integer.parseInt(newSepArg.get(add));
-                                            }
-                                            result = sum;
-                                            break;
-                                        }
-                                        System.out.println(result);
-                                    } catch (NumberFormatException e) {
-                                        System.out.println("ERROR " + "el interprete no puede operar strings");
-                                    }
+                                    int result = calc.aritmeticaParams2(expresion, newSepArg);
+                                    System.out.println(result);
                                 } //fin de argumento siendo expresion aritmetica
                             }
                         }
