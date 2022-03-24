@@ -941,7 +941,9 @@ public class Interprete {
                 break;
 
             case "defun":
-            
+            //Constructor de Funciones para llamar metodos
+            Funciones calc = new Funciones();
+
             //Guardar los parametros
             String parametros = lista[1];
             parametros = parametros.replace("(", "");
@@ -1037,7 +1039,7 @@ public class Interprete {
                             }
                         }
 
-                        System.out.println("argumento con if " + newSepArg);
+
                         if (!error) {
                             for (int j = 0; j < newSepArg.size(); j++) {
                                 //hay un if
@@ -1052,8 +1054,13 @@ public class Interprete {
                                     //igual que
                                     case "=":
                                         if (comp1.equals(comp2)) {
-                                            for (int k = j + 4; k < newSepArg.size(); k++) {
-                                                
+                                            for (int k = 0; k < newSepArg.size(); k++) {
+                                                if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
+                                                    System.out.println("LLEGO A EXPRESION DENTRO DEL IF");
+                                                    String expresion = newSepArg.get(k);
+                                                    int result = calc.expresionesAritmeticasParam1(expresion, newSepArg, parametro);
+                                                    System.out.println(result);
+                                                }
                                             }
                                         }
                                         break;
@@ -1080,55 +1087,10 @@ public class Interprete {
                                 } else if (newSepArg.get(j).equals("+") || newSepArg.get(j).equals("r") || newSepArg.get(j).equals("*") || newSepArg.get(j).equals("/")) {
                                     //Expresion aritmetica
                                     String expresion = newSepArg.get(j);
-        
-                                    try {
-    
-                                        int sum = 0;
-                                        int result = 0;
-                                        int add = 0;
-                                        switch (expresion) {
-                                            case "+":
-                                            for (int k = 1; k < newSepArg.size(); k++) {
-                                                add += 1;
-                                                sum += Integer.parseInt(newSepArg.get(add));
-                                            }
-                                            result = sum;
-                                            break;
-        
-                                            case "r":
-                                            add = 1;
-                                            sum = Integer.parseInt(parametro);
-                                            for (int k = 0; k < newSepArg.size() - 2; k++) {
-                                                add += 1;
-                                                sum = sum - Integer.parseInt(newSepArg.get(add));
-                                            }
-                                            result = sum;
-                                            break;
-        
-                                            case "*":
-                                            add = 1;
-                                            sum = Integer.parseInt(parametro);
-                                            for (int k = 0; k < newSepArg.size() - 2; k++) {
-                                                add += 1;
-                                                sum = sum * Integer.parseInt(newSepArg.get(add));
-                                            }
-                                            result = sum;
-                                            break;
-        
-                                            case "/":
-                                            add = 1;
-                                            sum = Integer.parseInt(parametro);
-                                            for (int k = 0; k < newSepArg.size() - 2; k++) {
-                                                add += 1;
-                                                sum = sum / Integer.parseInt(newSepArg.get(add));
-                                            }
-                                            result = sum;
-                                            break;
-                                        }
-                                        System.out.println(result);
-                                    } catch (NumberFormatException e) {
-                                        System.out.println("ERROR " + "el interprete no puede operar strings");
-                                    }
+                                    
+                                    int result = calc.expresionesAritmeticasParam1(expresion, newSepArg, parametro);
+                                    System.out.println(result);
+
                                 } //fin de argumento siendo expresion aritmetica
                             }
                         }     
