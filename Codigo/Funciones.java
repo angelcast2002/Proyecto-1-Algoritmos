@@ -106,4 +106,59 @@ public class Funciones {
         
     }
 
+    public int aritmeticaParam2(String expresion, ArrayList<String> newSepArg, String parametro) {
+        int sum = 0;
+        int result = 0;
+        int add = 0;
+
+        try {
+    
+            switch (expresion) {
+                case "+":
+                for (int k = 1; k < newSepArg.size(); k++) {
+                    add += 1;
+                    sum += Integer.parseInt(newSepArg.get(add));
+                }
+                result = sum;
+                break;
+
+                case "r":
+                add = 1;
+                sum = Integer.parseInt(newSepArg.get(1));
+                for (int k = 0; k < newSepArg.size() - 2; k++) {
+                    add += 1;
+                    sum = sum - Integer.parseInt(newSepArg.get(add));
+                }
+                result = sum;
+                break;
+
+                case "*":
+                add = 1;
+                sum = Integer.parseInt(newSepArg.get(1));
+                System.out.println(newSepArg);
+                for (int k = 0; k < newSepArg.size() - 2; k++) {
+                    add += 1;
+                    sum = sum * Integer.parseInt(newSepArg.get(add));
+                }
+                result = sum;
+                break;
+
+                case "/":
+                add = 1;
+                sum = Integer.parseInt(newSepArg.get(1));
+                for (int k = 0; k < newSepArg.size() - 2; k++) {
+                    add += 1;
+                    sum = sum / Integer.parseInt(newSepArg.get(add));
+                }
+                result = sum;
+                break;
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("ERROR " + "el interprete no puede operar strings");
+        }
+
+        return result;
+
+    }
+
 }
