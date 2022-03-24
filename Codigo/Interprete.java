@@ -615,7 +615,26 @@ public class Interprete {
                 }
             }
                 break;
-
+            
+            case "quote":
+            try {
+                String Instruccion = "(";
+                for (int j = 1; j < comando.length; j++) {
+                    if ((j+1) == comando.length) {
+                        Instruccion = Instruccion + comando[j];
+                    } else {
+                        Instruccion = Instruccion + comando[j] + " ";
+                    }
+                    
+                }
+                Instruccion = Instruccion + ")";
+                vista.print(Instruccion);
+            } catch (Exception e) {
+                //TODO: handle exception
+                vista.prinrErr("Upss parece que algo salio mal intentalo de nuevo :P");
+            }
+                
+                break;
             case "nth":
             try {
 
