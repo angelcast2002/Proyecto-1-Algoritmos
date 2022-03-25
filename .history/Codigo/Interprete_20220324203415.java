@@ -16,6 +16,10 @@ import java.util.Scanner;
 import java.util.Arrays;
 import java.util.ListIterator;
 
+/**
+ *
+ * @author Angel
+ */
 public class Interprete {
 
     
@@ -27,7 +31,7 @@ public class Interprete {
     List<Funciones> funciones = new ArrayList<>();
 
     /**
-     * Sirve unicamente para mandar a llamar todo el funcionamiento del programa, ademas tambien detecta si se desea salir y muestra algunos elementos
+     *
      */
     public void ejecutar() {
 
@@ -66,9 +70,9 @@ public class Interprete {
     }
 
     /**
-     * Aqui se ejecuta todo el programa y muestra los mensajes correspondientes
-     * @param instruccion es basicamente el comando dado en un string
-     * @return null
+     *
+     * @param instruccion
+     * @return
      */
     public String Evaluar(String instruccion) {
         
@@ -1655,7 +1659,7 @@ public class Interprete {
 
     /**
      *
-     * @param valor verifica que un String se pueda convertir a un numero
+     * @param valor
      * @return
      */
     public static boolean isNumber(String valor){
@@ -1674,8 +1678,8 @@ public class Interprete {
 
     /**
      *
-     * @param chain es el String a evaluar
-     * @param caracter son los caracteres
+     * @param chain
+     * @param caracter
      * @return
      */
     public static int contarCaracteres(String chain, char caracter) {
