@@ -112,6 +112,7 @@ public class Funciones {
         int add = 0;
         boolean distOp = true;
 
+
         while (distOp) {
             if (!newSepArg.get(0).equals(expresion)) {
                 newSepArg.remove(0);
@@ -228,6 +229,7 @@ public class Funciones {
         int result = 0;
         int add = 0;
         boolean distOp = true;
+
 
         while (distOp) {
             if (!newSepArg.get(0).equals(expresion)) {
