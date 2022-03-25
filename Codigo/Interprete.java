@@ -1094,7 +1094,7 @@ public class Interprete {
                                                 if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
                                                     String expresion = newSepArg.get(k);
                                                     int result = calc.ifAritmeticaParam1(expresion, newSepArg, parametro);
-                                                    System.out.println(result);
+                                                    vista.print(Integer.toString(result));
                                                 }
                                             }
 
@@ -1113,7 +1113,7 @@ public class Interprete {
                                                     if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
                                                         String expresion = newSepArg.get(k);
                                                         int result = calc.ifAritmeticaParam1(expresion, newSepArg, parametro);
-                                                        System.out.println(result);
+                                                        vista.print(Integer.toString(result));
                                                     }
                                                 }
                                             }
@@ -1134,7 +1134,7 @@ public class Interprete {
                                                 if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
                                                     String expresion = newSepArg.get(k);
                                                     int result = calc.ifAritmeticaParam1(expresion, newSepArg, parametro);
-                                                    System.out.println(result);
+                                                    vista.print(Integer.toString(result));
                                                 }
                                             }
                                         }
@@ -1156,7 +1156,7 @@ public class Interprete {
                                                 if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
                                                     String expresion = newSepArg.get(k);
                                                     int result = calc.ifAritmeticaParam1(expresion, newSepArg, parametro);
-                                                    System.out.println(result);
+                                                    vista.print(Integer.toString(result));
                                                 }
                                             }
                                         }
@@ -1177,13 +1177,13 @@ public class Interprete {
                                                 if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
                                                     String expresion = newSepArg.get(k);
                                                     int result = calc.ifAritmeticaParam1(expresion, newSepArg, parametro);
-                                                    System.out.println(result);
+                                                    vista.print(Integer.toString(result));
                                                 }
                                             }
                                         }
 
                                     } catch (NumberFormatException e) {
-                                        System.out.println("ERROR: No se puede detectar mayor o menor que entre strings");
+                                        vista.prinrErr("ERROR: No se puede detectar mayor o menor que entre strings");
                                     }
 
                                         break;
@@ -1196,7 +1196,7 @@ public class Interprete {
                                     String expresion = newSepArg.get(j);
                                     
                                     int result = calc.expresionesAritmeticasParam1(expresion, newSepArg, parametro);
-                                    System.out.println(result);
+                                    vista.print(Integer.toString(result));
 
                                 } //fin de argumento siendo expresion aritmetica
                             }
@@ -1230,7 +1230,7 @@ public class Interprete {
                             }
     
                         } else {
-                            System.out.println("ERROR: Los parametros no se encuentran en el argumento de la funcion");
+                            vista.prinrErr("ERROR: Los parametros no se encuentran en el argumento de la funcion");
                             error = true;
                         }
 
@@ -1287,7 +1287,7 @@ public class Interprete {
                                                 if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
                                                     String expresion = newSepArg.get(k);
                                                     int result = calc.ifAritmeticaParam2(expresion, newSepArg);
-                                                    System.out.println(result);
+                                                    vista.print(Integer.toString(result));
                                                 }
                                             }
                                         }
@@ -1305,13 +1305,13 @@ public class Interprete {
                                                     if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
                                                         String expresion = newSepArg.get(k);
                                                         int result = calc.ifAritmeticaParam2(expresion, newSepArg);
-                                                        System.out.println(result);
+                                                        vista.print(Integer.toString(result));
                                                     }
                                                 }
                                             }
 
                                         } catch (NumberFormatException e) {
-                                            System.out.println("ERROR: No se puede detectar mayor o menor que entre strings");
+                                            vista.prinrErr("ERROR: No se puede detectar mayor o menor que entre strings");
                                         }
                                         break;
 
@@ -1326,7 +1326,49 @@ public class Interprete {
                                                     if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
                                                         String expresion = newSepArg.get(k);
                                                         int result = calc.ifAritmeticaParam2(expresion, newSepArg);
-                                                        System.out.println(result);
+                                                        vista.print(Integer.toString(result));
+                                                    }
+                                                }
+                                            }
+
+                                        } catch (NumberFormatException e) {
+                                            vista.prinrErr("ERROR: No se puede detectar mayor o menor que entre strings");
+                                        }
+                                        break;
+
+                                    case "<=":
+                                        try {
+                                            //Convierte los comparadores a int
+                                            int compInt1 = Integer.parseInt(comp1);
+                                            int compInt2 = Integer.parseInt(comp2);
+
+                                            if (compInt1 <= compInt2) {
+                                                for (int k = 0; k < newSepArg.size(); k++) {
+                                                    if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
+                                                        String expresion = newSepArg.get(k);
+                                                        int result = calc.ifAritmeticaParam2(expresion, newSepArg);
+                                                        vista.print(Integer.toString(result));
+                                                    }
+                                                }
+                                            }
+
+                                        } catch (NumberFormatException e) {
+                                            vista.prinrErr("ERROR: No se puede detectar mayor o menor que entre strings");
+                                        }
+                                        break;
+
+                                    case ">=":
+                                        try {
+                                            //Convierte los comparadores a int
+                                            int compInt1 = Integer.parseInt(comp1);
+                                            int compInt2 = Integer.parseInt(comp2);
+
+                                            if (compInt1 >= compInt2) {
+                                                for (int k = 0; k < newSepArg.size(); k++) {
+                                                    if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
+                                                        String expresion = newSepArg.get(k);
+                                                        int result = calc.ifAritmeticaParam2(expresion, newSepArg);
+                                                        vista.print(Integer.toString(result));
                                                     }
                                                 }
                                             }
@@ -1335,14 +1377,13 @@ public class Interprete {
                                             System.out.println("ERROR: No se puede detectar mayor o menor que entre strings");
                                         }
                                         break;
-
                                     } //end of switch
 
                                 } else if (newSepArg.get(j).equals("+") || newSepArg.get(j).equals("r") || newSepArg.get(j).equals("*") || newSepArg.get(j).equals("/")) {
                                     //Expresion aritmetica con 2 parametros
                                     String expresion = newSepArg.get(j);
                                     int result = calc.aritmeticaParam2(expresion, newSepArg);
-                                    System.out.println(result);
+                                    vista.print(Integer.toString(result));
                                 } //fin de argumento siendo expresion aritmetica
                             }
                         }
