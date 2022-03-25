@@ -1216,7 +1216,9 @@ public class Interprete {
                                     String expresion = newSepArg.get(j);
                                     
                                     int result = calc.expresionesAritmeticasParam1(expresion, newSepArg, parametro);
-                                    vista.print(Integer.toString(result));
+                                    if (result != 10000000) {
+                                        vista.print(Integer.toString(result));
+                                    }
 
                                 } //fin de argumento siendo expresion aritmetica
                             }

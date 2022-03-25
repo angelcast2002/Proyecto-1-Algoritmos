@@ -19,6 +19,7 @@ import java.util.ListIterator;
  */
 public class Funciones {
     
+    private Vista vista = new Vista();
     private String argus;
     private ArrayList<String> params = new ArrayList<>();
     private String name;
@@ -146,17 +147,23 @@ public class Funciones {
                 break;
 
                 case "/":
-                add = 1;
-                sum = Integer.parseInt(parametro);
-                for (int l = 0; l < newSepArg.size() - 2; l++) {
-                    add += 1;
-                    sum = sum / Integer.parseInt(newSepArg.get(add));
+                try {
+                    add = 1;
+                    sum = Integer.parseInt(parametro);
+                    for (int l = 0; l < newSepArg.size() - 2; l++) {
+                        add += 1;
+                        sum = sum / Integer.parseInt(newSepArg.get(add));
+                    }
+                } catch (ArithmeticException e) {
+                    vista.prinrErr("ERROR: Divided by zero");
+                    result = 10000000;
+                    break;
                 }
                 result = sum;
                 break;
             }
         } catch (NumberFormatException e) {
-            System.out.println("ERROR " + "el interprete no puede operar strings");
+            vista.prinrErr("ERROR " + "el interprete no puede operar strings");
         }
 
         return result;
@@ -227,7 +234,7 @@ public class Funciones {
                 break;
             }
         } catch (NumberFormatException e) {
-            System.out.println("ERROR " + "el interprete no puede operar strings");
+            vista.prinrErr("ERROR " + "el interprete no puede operar strings");
         }
 
         return result;
@@ -287,7 +294,7 @@ public class Funciones {
                 break;
             }
         } catch (NumberFormatException e) {
-            System.out.println("ERROR " + "el interprete no puede operar strings");
+            vista.prinrErr("ERROR " + "el interprete no puede operar strings");
         }
 
         return result;
@@ -350,14 +357,18 @@ public class Funciones {
                 add = 1;
                 sum = Integer.parseInt(newSepArg.get(1));
                 for (int k = 0; k < newSepArg.size() - 2; k++) {
-                    add += 1;
-                    sum = sum / Integer.parseInt(newSepArg.get(add));
+                    try {
+                        add += 1;
+                        sum = sum / Integer.parseInt(newSepArg.get(add));
+                    } catch (ArithmeticException e) {
+                        vista.prinrErr("ERROR: Divided by zero");
+                    }
                 }
                 result = sum;
                 break;
             }
         } catch (NumberFormatException e) {
-            System.out.println("ERROR " + "el interprete no puede operar strings");
+            vista.prinrErr("ERROR " + "el interprete no puede operar strings");
         }
 
         return result;
