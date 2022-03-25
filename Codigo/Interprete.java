@@ -1095,12 +1095,7 @@ public class Interprete {
                                                     String expresion = newSepArg.get(k);
                                                     int result = calc.ifAritmeticaParam1(expresion, newSepArg, parametro);
                                                     System.out.println(result);
-                                                } else {
-                                                    text += newSepArg.get(k) + " ";
                                                 }
-                                            }
-                                            if (text != null) {
-                                                System.out.println(text);
                                             }
 
                                         }
@@ -1290,7 +1285,6 @@ public class Interprete {
                                         if (comp1.equals(comp2)) {
                                             for (int k = 0; k < newSepArg.size(); k++) {
                                                 if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
-                                                    System.out.println("LLEGO A EXPRESION DENTRO DEL IF");
                                                     String expresion = newSepArg.get(k);
                                                     int result = calc.ifAritmeticaParam2(expresion, newSepArg);
                                                     System.out.println(result);
