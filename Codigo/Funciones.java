@@ -110,11 +110,14 @@ public class Funciones {
         int sum = 0;
         int result = 0;
         int add = 0;
+        boolean distOp = true;
 
-        for (int i = 0; i < newSepArg.size(); i++) {
-            if (newSepArg.get(i) != "+" && newSepArg.get(i) != "r" && newSepArg.get(i) != "*" && newSepArg.get(i) != "/" ) {
-                newSepArg.remove(i);
-            } 
+        while (distOp) {
+            if (!newSepArg.get(0).equals(expresion)) {
+                newSepArg.remove(0);
+            } else {
+                distOp = false;
+            }
         }
 
         try {
@@ -224,11 +227,14 @@ public class Funciones {
         int sum = 0;
         int result = 0;
         int add = 0;
+        boolean distOp = true;
 
-        for (int i = 0; i < newSepArg.size(); i++) {
-            if (newSepArg.get(i) != "+" && newSepArg.get(i) != "r" && newSepArg.get(i) != "*" && newSepArg.get(i) != "/" ) {
-                newSepArg.remove(i);
-            } 
+        while (distOp) {
+            if (!newSepArg.get(0).equals(expresion)) {
+                newSepArg.remove(0);
+            } else {
+                distOp = false;
+            }
         }
 
         try {

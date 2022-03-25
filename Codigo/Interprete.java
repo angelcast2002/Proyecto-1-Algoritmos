@@ -983,6 +983,9 @@ public class Interprete {
             //Se inicializa argumento
             String argumento = "";
 
+            //Mensaje
+            String text = "";
+
             //Guardar lo que hace la funcion (si hay 3 elementos en lista, se esta creando la funcion)
             if (lista.length == 3) {
                 argumento = lista[2];
@@ -1053,7 +1056,7 @@ public class Interprete {
                         for (int j = 0; j < newSepArg.size(); j++) {
                             if (newSepArg.get(j).equals(nombreTemp)) {
                                 for (int l = 0; l < j; l++) {
-                                    if(newSepArg.get(l).equals("+") || newSepArg.get(l).equals("-") || newSepArg.get(l).equals("*") || newSepArg.get(l).equals("/")) {
+                                    if(newSepArg.get(l).equals("+") || newSepArg.get(l).equals("r") || newSepArg.get(l).equals("*") || newSepArg.get(l).equals("/")) {
                                     } else {
                                         newSepArg.add(newSepArg.get(l));
                                     }
@@ -1087,13 +1090,19 @@ public class Interprete {
                                     //igual que
                                     case "=":
                                         if (comp1.equals(comp2)) {
-                                            for (int k = 0; k < newSepArg.size(); k++) {
+                                            for (int k = 4; k < newSepArg.size(); k++) {
                                                 if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
                                                     String expresion = newSepArg.get(k);
                                                     int result = calc.ifAritmeticaParam1(expresion, newSepArg, parametro);
                                                     System.out.println(result);
+                                                } else {
+                                                    text += newSepArg.get(k) + " ";
                                                 }
                                             }
+                                            if (text != null) {
+                                                System.out.println(text);
+                                            }
+
                                         }
                                         break;
 
@@ -1106,7 +1115,7 @@ public class Interprete {
 
                                             if (compInt1 > compInt2) {
 
-                                            }
+                                            } 
 
                                         } catch (NumberFormatException e) {
                                             System.out.println("ERROR: No se puede detectar mayor o menor que entre strings");
@@ -1132,6 +1141,52 @@ public class Interprete {
                                     } catch (NumberFormatException e) {
                                         System.out.println("ERROR: No se puede detectar mayor o menor que entre strings");
                                     }
+                                    
+                                        break;
+
+                                    case "<=":
+                                    try {
+                                        //Convierte los comparadores a int
+                                        int compInt1 = Integer.parseInt(comp1);
+                                        int compInt2 = Integer.parseInt(comp2);
+
+                                        if (compInt1 <= compInt2) {
+                                            for (int k = 0; k < newSepArg.size(); k++) {
+                                                if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
+                                                    String expresion = newSepArg.get(k);
+                                                    int result = calc.ifAritmeticaParam1(expresion, newSepArg, parametro);
+                                                    System.out.println(result);
+                                                }
+                                            }
+                                        }
+
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("ERROR: No se puede detectar mayor o menor que entre strings");
+                                    }
+                                        break;
+
+                                    case ">=":
+                                    try {
+                                        //Convierte los comparadores a int
+                                        int compInt1 = Integer.parseInt(comp1);
+                                        int compInt2 = Integer.parseInt(comp2);
+
+                                        if (compInt1 >= compInt2) {
+                                            for (int k = 0; k < newSepArg.size(); k++) {
+                                                if (newSepArg.get(k).equals("+") || newSepArg.get(k).equals("r") || newSepArg.get(k).equals("*") || newSepArg.get(k).equals("/")) {
+                                                    String expresion = newSepArg.get(k);
+                                                    int result = calc.ifAritmeticaParam1(expresion, newSepArg, parametro);
+                                                    System.out.println(result);
+                                                }
+                                            }
+                                        }
+
+                                    } catch (NumberFormatException e) {
+                                        System.out.println("ERROR: No se puede detectar mayor o menor que entre strings");
+                                    }
+
+                                        break;
+
                                     } //fin del switch operator
 
 
