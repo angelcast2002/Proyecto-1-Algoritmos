@@ -24,8 +24,6 @@ public class Funciones {
     private String name;
     /**
      * 	Este constructor si lo utilizo
-		@param argus - Param que recibe para que pueda operar correctamente
-		@param eje - Operaciones de la funcion
      */
 
      //Constructor sin nada

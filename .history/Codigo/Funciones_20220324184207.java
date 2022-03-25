@@ -1,22 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-
-
-/**
- *
- * @author Angel
- * @author Mario
- * @author Javier
- */
 import java.util.ArrayList;
 import java.util.ListIterator;
 
-/**
- *
- * @author Angel
- */
 public class Funciones {
     
     private String argus;
@@ -32,83 +16,42 @@ public class Funciones {
      public Funciones() {
      }
 
-    /**
-     *
-     * @param name
-     * @param params
-     * @param argus
-     */
     public Funciones(String name, ArrayList<String> params,String argus) { //Sobrecargo mi constructor 
         this.params = params; //Asigno 
         this.argus = argus; //Asigno
         this.name = name;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getName() {
         return this.name;
     }
 
-    /**
-     *
-     * @param name
-     */
     public void setName(String name) {
         this.name = name;
     }
 
-    /**
-     *
-     * @return
-     */
     public String getArgus() {
         return this.argus;
     }
 
-    /**
-     *
-     * @param argus
-     */
     public void setArgus(String argus) {
         this.argus = argus;
     }
 
-    /**
-     *
-     * @return
-     */
     public ArrayList<String> getParams() {
         return this.params;
     }
 
-    /**
-     *
-     * @param params
-     */
     public void setParams(ArrayList<String> params) {
         this.params = params;
     }
 
-    /**
-     *
-     * @param argumento
-     */
     public void recursividad(String argumento) {
 
         
 
     }
 
-    /**
-     *
-     * @param expresion
-     * @param newSepArg
-     * @param parametro
-     * @return
-     */
     public int expresionesAritmeticasParam1(String expresion, ArrayList<String> newSepArg, String parametro) {
         int sum = 0;
         int result = 0;
@@ -163,13 +106,6 @@ public class Funciones {
         
     }
 
-    /**
-     *
-     * @param expresion
-     * @param newSepArg
-     * @param parametro
-     * @return
-     */
     public int ifAritmeticaParam1(String expresion, ArrayList<String> newSepArg, String parametro) {
         int sum = 0;
         int result = 0;
@@ -234,12 +170,6 @@ public class Funciones {
         
     }
 
-    /**
-     *
-     * @param expresion
-     * @param newSepArg
-     * @return
-     */
     public int aritmeticaParam2(String expresion, ArrayList<String> newSepArg) {
         int sum = 0;
         int result = 0;
@@ -294,12 +224,6 @@ public class Funciones {
 
     }
 
-    /**
-     *
-     * @param expresion
-     * @param newSepArg
-     * @return
-     */
     public int ifAritmeticaParam2(String expresion, ArrayList<String> newSepArg) {
         int sum = 0;
         int result = 0;
@@ -366,4 +290,3 @@ public class Funciones {
     }
 
 }
-

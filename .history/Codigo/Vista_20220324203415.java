@@ -19,7 +19,7 @@ public class Vista {
 
     /**
      *
-     * @param mensaje es el mensaje que se muestra en consola
+     * @param mensaje
      */
     public void prinrErr(String mensaje) {
         System.out.print(red + "$$ " + mensaje + reset + "\n");
@@ -27,7 +27,7 @@ public class Vista {
 
     /**
      *
-     * @param mensaje es el mensaje que se muestra en consola
+     * @param mensaje
      */
     public void print(String mensaje) {
         System.out.print(green + "$$ " + mensaje + reset + "\n");
